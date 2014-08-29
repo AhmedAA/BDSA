@@ -1,0 +1,85 @@
+\documentclass[10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier} % Nicenesss font
+\usepackage{amsfonts,amsmath}
+\usepackage[pdftex]{color,graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{mdwlist}
+\usepackage{pgfgantt}
+
+\usepackage{hyperref}
+\usepackage{lscape}
+
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\renewcommand{\thesection}{\arabic{section}}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\usepackage{hyperref}
+\pagestyle{fancy}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%If in need of a header for the document, uncomment this and add desired text!
+%\fancyhead[LO,LE]{}
+%\fancyhead[RO,RE]{}
+%
+
+%Macro foo
+\newcommand{\method}[3]{ \label{method:#2}
+    {\vspace{10pt} \noindent \textbf{#1} \textit{#2}(#3)} :
+}
+\newcommand{\argument}[2]{{\textbf{#1} #2}}
+
+
+%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+
+\begin{center}
+
+\textsc{\LARGE BDSA}\\[1.5cm]
+
+\textsc{\Large Exercise 1}\\[0.5cm]
+
+\HRule \\[0.4cm]
+
+{ \bfseries Managing hand-in across low bandwidth \\[0.5cm] 
+    {\small \today}} \\[0.7cm]
+
+\HRule \\ [6.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+Ahmed Al Aqtash (ahaq)\\
+\textit{ahmed.aqtash@gmail.com}\\
+[0.2cm]
+
+\vfill 
+
+% Bottom of the page front page
+
+
+\end{center}
+
+\end{titlepage}
+\clearpage
+
+\section{Derp}
+This was added for the sake of test
+
+\end{document}
