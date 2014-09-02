@@ -1,0 +1,136 @@
+\documentclass[10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier} % Nicenesss font
+\usepackage{amsfonts,amsmath}
+\usepackage[pdftex]{color,graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{mdwlist}
+\usepackage{pgfgantt}
+
+\usepackage{hyperref}
+\usepackage{lscape}
+
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\renewcommand{\thesection}{\arabic{section}}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\usepackage{hyperref}
+\pagestyle{fancy}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%If in need of a header for the document, uncomment this and add desired text!
+%\fancyhead[LO,LE]{}
+%\fancyhead[RO,RE]{}
+%
+
+%Macro foo
+\newcommand{\method}[3]{ \label{method:#2}
+    {\vspace{10pt} \noindent \textbf{#1} \textit{#2}(#3)} :
+}
+\newcommand{\argument}[2]{{\textbf{#1} #2}}
+
+
+%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+
+\begin{center}
+
+\textsc{\LARGE BDSA}\\[1.5cm]
+
+\textsc{\Large Exercise 1}\\[0.5cm]
+
+\HRule \\[0.4cm]
+
+{ \bfseries Assignment \#35 \\[0.5cm] 
+    {\small \today}} \\[0.7cm]
+
+\HRule \\ [6.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+Ahmed Al Aqtash (ahaq)\\
+\textit{ahmed.aqtash@gmail.com}\\
+[0.2cm]
+
+\vfill 
+\end{flushleft}
+\end{minipage}
+
+% Bottom of the page front page
+
+
+\end{center}
+
+\end{titlepage}
+\clearpage
+
+\section{Question 1-2}
+An advantage to using a programming language to define everything in the
+development process is that provides an easier transition from design, to
+actual implementation (if not eliminate the entire step between). It should
+also provide more consistency in the project, since everything is defined with
+the same terms.
+
+A clear disadvantage would be that the development team is entirely limited to
+programmers, since programmers are mainly the only ones who could understand
+what exactly was going on. This prevents the team from actually using people 
+with specific knowledge in designated areas, such as Human Computer 
+Interaction experts, or visual design experts.
+
+\section{Question 1-4}
+That knowledge aqcuisition is not sequential, means that a person does not
+absorb new information as it is piled on. A persons ability to learn varies,
+but it is mainly in a way where the person absorbs bits, and needs
+to keep refreshing what he/she has learned.
+
+An example of this, is when a person understands a given problem and solution
+after haveing studied it several times. Although the person has been filled
+with the necessary information, he/she does not necessarily understand why
+things work out as they do. This should be a prime example of how knowledge is
+being acquired in parrallel. A specific example would be when a class is
+being taught in a new subject. Students who have studied ahead, should have
+and easier time grasping this new subject, than students who have not.
+
+\section{Question 1-6}
+\begin{itemize}
+\item “The TicketDistributor must enable a traveler to buy weekly passes.”
+    Is a functional requirement, since it has to do with a function the system
+    must support.
+\item “The TicketDistributor must be written in Java.” Is a non-functional
+    requirement, since it has nothing to do with what the product should
+    support.
+\item “The TicketDistributor must be easy to use.” Is also a non-functional
+    requirement. It has to do with how the users interact with the system, but
+    not what the system supports.
+\item “The TicketDistributor must always be available.” Is also a
+    non-functional requirement. This also has to do with how users interact
+    with the system.
+\item “The TicketDistributor must provide a phone number to call when it
+    fails." I am uncertain about this one. I would categorise it as a
+    functional requirement, since it could technically be a feature of the
+    system, but then again....
+\end{itemize}
+
+\section{Question 1-8}
+The two first sentences talk about an account as a bank account. The third
+sentence talks about a user account (application domain), and the last
+sentence again mentions accounts as bank accounts.
+
+\end{document}
