@@ -1,0 +1,225 @@
+\documentclass[10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier} % Nicenesss font
+\usepackage{amsfonts,amsmath}
+\usepackage[pdftex]{color,graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{mdwlist}
+\usepackage{pgfgantt}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{a4wide}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\usepackage{hyperref}
+\usepackage{lscape}
+
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\renewcommand{\thesection}{\arabic{section}}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\usepackage{hyperref}
+\pagestyle{fancy}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%If in need of a header for the document, uncomment this and add desired text!
+%\fancyhead[LO,LE]{}
+%\fancyhead[RO,RE]{}
+%
+
+%Macro foo
+\newcommand{\method}[3]{ \label{method:#2}
+    {\vspace{10pt} \noindent \textbf{#1} \textit{#2}(#3)} :
+}
+\newcommand{\argument}[2]{{\textbf{#1} #2}}
+
+
+%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+
+\begin{center}
+
+\textsc{\LARGE BDSA}\\[1.5cm]
+
+\textsc{\Large Exercise 2}\\[0.5cm]
+
+\HRule \\[0.4cm]
+
+{ \bfseries Assignment \#36 \\[0.5cm] 
+    {\small \today}} \\[0.7cm]
+    {\small Version 1}
+
+\HRule \\ [6.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+Ahmed Al Aqtash (ahaq)\\
+\textit{ahmed.aqtash@gmail.com}\\
+Mikkel Åxman (mikx)\\
+\textit{mikx@itu.dk}\\
+Phillip Phoelich (ppho)\\
+\textit{ppho@itu.dk}\\
+[0.2cm]
+
+\vfill 
+\end{flushleft}
+\end{minipage}
+
+% Bottom of the page front page
+
+
+\end{center}
+
+\end{titlepage}
+\clearpage
+\section{Document history}
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{l l X l}
+\textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\ \midrule
+1.0     & 9/9-2014 & First version of the document & ahaq, mikx, ppho  \\
+        &          &                               & \\
+        &          &                               & \\
+\end{tabularx}
+\end{table}
+
+\clearpage
+\section{Question 2-4}
+We had to make some assumptions and some simplifications. We have pulled some inspiration from the Danish train ticket system. The simplifications include not taking into account the distance to travel, when buying tickets.\\
+
+% Buy One Way Ticket
+%-----------------
+\begin{table}[H]
+\noindent \textbf{Buy one way ticket}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & BuyOneWayTicket \\ \midrule
+\textit{Participating actor} & Initiated by Traveler \\ \midrule
+\textit{Flow of events} & \tabitem The Traveler pushes the "buy one way ticket" button.\\
+						& \tabitem The Traveler puts cash or payment card into the machine.\\
+                        & \tabitem The Traveler confirms purchase and the ticket is printed.\\
+                        \midrule
+\textit{Entry condition} & The Traveler pushes the "buy one way ticket" button.\\ \midrule
+\textit{Exit condition} & \tabitem When the purchase is done and the ticket printed. \\
+						& \tabitem If the purchase is cancelled.\\
+                        \midrule
+\textit{Quality requirements} & At any point during the flow of events the Traveler can cancel the purchase. When purchase is cancelled every action taken by the system is rolled back and a message about the cancellation is displayed to the Traveler. \\ \midrule
+\end{tabularx}
+\end{table}
+
+% Buy Weekly Card
+%-----------------
+\begin{table}[H]
+\noindent \textbf{Buy weekly card}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & BuyWeeklyCard \\ \midrule
+\textit{Participating actor} & Initiated by Traveler. \\ \midrule
+\textit{Flow of events} & \tabitem The Traveler pushes the "buy weekly card" button. \\
+						& \tabitem The Traveler puts cash or payment card into the machine.\\
+                        & \tabitem The Traveler confirms purchase and the card is printed.\\
+                        \midrule
+\textit{Entry condition} & The Traveler clicks on the "buy weekly card" button.\\ \midrule
+\textit{Exit condition} & \tabitem When the purchase is done and the card printed.\\
+						& \tabitem If the purchase is cancelled.\\
+                        \midrule
+\textit{Quality requirements} & At any point during the flow of events the Traveler can cancel the purchase. When purchase is cancelled every action taken by the system is rolled back and a message about the cancellation is displayed to the Traveler. \\ \midrule
+\end{tabularx}
+\end{table}
+
+% Buy Monthly Card
+%-----------------
+\begin{table}[H]
+\noindent \textbf{Buy monthly card}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & BuyMonthlyCard \\ \midrule
+\textit{Participating actor} & Initiated by Traveler \\ \midrule
+\textit{Flow of events} & \tabitem The Traveler pushes the "buy monthly card" button.\\
+						& \tabitem The Traveler puts cash or payment card into the machine.\\
+                        & \tabitem The Traveler confirms purchase and the card is printed.\\
+                        \midrule
+\textit{Entry condition} & The Traveler clicks on the "buy monthly card" button.\\ \midrule
+\textit{Exit condition} & \tabitem When the purchase is done and the card printed. \\
+						& \tabitem If the purchase is cancelled.\\
+                        \midrule
+\textit{Quality requirements} & At any point during the flow of events the Traveler can cancel the purchase. When purchase is cancelled every action taken by the system is rolled back and a message about the cancellation is displayed to the Traveler. \\ \midrule
+\end{tabularx}
+\end{table}
+
+% Update Tariff
+%-----------------
+\begin{table}[H]
+\noindent \textbf{Update tariff}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & UpdateTariff \\ \midrule
+\textit{Participating actor} & Initiated by Central Computer System(CCS) \\ \midrule
+\textit{Flow of events} & \tabitem Because of an update to the CSS's price list, it wants to update all ticket machines (who run our system). It can also be because of the frequent update calls to the ticket machiens.\\
+						& \tabitem The ticket machine object's updatePriceList method is called with a new price list as parameter.\\
+                        & \tabitem The system updates its list to reflect the changes from the received price list.\\
+                        \midrule
+\textit{Entry condition} & \tabitem The CSS's price list is updated and it will try to update all ticket machine systems.\\
+                        & \tabitem The CSS sends its price list on frequent basis.\\
+                        \midrule
+\textit{Exit condition} & \tabitem When the price list is updated.\\
+						& \tabitem If the connection to the CSS is lost.\\
+                        \midrule
+\textit{Quality requirements} & The prices displayed should always be the correct ones (if there is a connection between the ticket machine and the CSS), since the CSS sends out its price list frequently and also when it is updated.\\ \midrule
+\end{tabularx}
+\end{table}
+
+\newpage
+\section{Diagrams}
+We have made some assumptions reagarding the class diagram. We decided to pull inspiration from the Danish ticket system,
+such that every ticket, or card, has an expiration date and a "zone" to travel in.
+
+We have also extended the system, through the diagrams, so that they make sense in regards to the system they are emulating. For instance, we expanded the ticketmachine class to also include a printer and a display, since it is much easier to comprehend the entire system when looking at the sequence diagram.
+
+\subsection{Use Case Diagram}
+\begin{center}
+\includegraphics[scale=0.8, angle=90]{Use_Case_Diagram.png}
+\end{center}
+
+\subsection{Class Diagram}
+\begin{center}
+\includegraphics[scale=0.8]{Class_Diagram.png}
+\end{center}
+
+\subsection{Sequence Diagram}
+\begin{center}
+\includegraphics[scale=0.8, angle=90]{Sequence_Diagram_Traveler.png}
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.85]{Sequence_Diagram_CCS.png}
+\end{center}
+
+\subsection{Activity Diagram}
+\begin{center}
+\includegraphics[scale=0.8, angle=90]{Activity_Diagram.png}
+\end{center}
+
+\section{GLOSSARY HERE}
+\begin{itemize}
+\item CCS - Central Computer System: One of the actors.
+\end{itemize}
+
+\end{document}

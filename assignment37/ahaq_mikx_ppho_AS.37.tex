@@ -1,0 +1,165 @@
+\documentclass[10pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{fourier} % Nicenesss font
+\usepackage{amsfonts,amsmath}
+\usepackage[pdftex]{color,graphicx}
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{soul}
+\usepackage{algorithmic}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{mdwlist}
+\usepackage{pgfgantt}
+\usepackage{a4wide}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+\usepackage{hyperref}
+\usepackage{lscape}
+
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\renewcommand{\thesection}{\arabic{section}}
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+%\usepackage{hyperref}
+\pagestyle{fancy}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+%If in need of a header for the document, uncomment this and add desired text!
+%\fancyhead[LO,LE]{}
+%\fancyhead[RO,RE]{}
+%
+
+%Macro foo
+\newcommand{\method}[3]{ \label{method:#2}
+    {\vspace{10pt} \noindent \textbf{#1} \textit{#2}(#3)} :
+}
+\newcommand{\argument}[2]{{\textbf{#1} #2}}
+
+
+%%%%%%%%%%%% END OF PREAMBLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{titlepage}
+
+\begin{center}
+
+\textsc{\LARGE BDSA}\\[1.5cm]
+
+\textsc{\Large Requirement Analysis Document}\\[0.5cm]
+
+\HRule \\[0.4cm]
+
+{ \bfseries Assignment \#37 \\[0.5cm] 
+    {\small \today}} \\[0.7cm]
+
+\HRule \\ [6.5cm]
+
+% Author and supervisor
+\begin{minipage}{0.5\textwidth}
+\begin{flushleft} \large
+Ahmed Al Aqtash (ahaq)\\
+\textit{ahmed.aqtash@gmail.com}\\
+Mikkel Åxman (mikx)\\
+\textit{mikx@itu.dk}\\
+Phillip Phoelich (ppho)\\
+\textit{ppho@itu.dk}\\
+
+\vfill 
+\end{flushleft}
+\end{minipage}
+% Bottom of the page front page
+
+\end{center}
+
+\end{titlepage}
+\clearpage
+\begin{table}[h]
+\begin{tabularx}{\textwidth}{l l X l}
+\textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\ \midrule
+1.0     & 9/9-2014 & First version of the document & ahaq, mikx, ppho  \\
+        &          &                               & \\
+        &          &                               & \\
+\end{tabularx}
+\end{table}
+
+\clearpage
+
+\section{Actors}
+The actors identified in this section have been selected based on both users and
+back end system. The intermediary layers (if any) are also here
+\begin{itemize}
+\item \textbf{User} - The end user of the system, who wants to add calendars or
+  events to his client.
+\item \textbf{Client/Front end} - The client program that the user uses to view
+  his calendar.
+\item \textbf{Back end} - The server that should store calendar data from
+  providers and user data.
+\item \textbf{Provider} - A provider is a user that provides calendar data to be
+  used in the system. A user can subscribe to a calendar from a provider.
+\end{itemize}
+
+\section{Scenarios}
+\begin{table}[H]
+\noindent \textbf{Add calendar}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Scenario name} & Add local calendar \\ \midrule
+\textit{Participating actor} & \underline{Bob:User} \\ \midrule
+\textit{Flow of events} & \tabitem Bob opens his client, and clicks the add
+                                       calendar button \\
+                                       & \tabitem The client presents Bob with
+                                       an option to add a local calendar, or a
+                                       calendar from a network location (URL). \\
+                                       & \tabitem Bob adds a local calendar, and
+                                       names it accordingly. \\
+                                       & \tabitem Bob can now view his newly
+                                       added calendar. \\
+                                       \midrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\noindent \textbf{Add event}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Scenario name} & Add local event \\ \midrule
+\textit{Participating actor} & \underline{Bob:User} \\ \midrule
+\textit{Flow of events} & \tabitem Bob opens his client, and clicks the add
+                                       event button \\
+                                       & \tabitem The client presents Bob with
+                                       a box to fill out information regarding
+                                       the event, and the calendar to which Bob
+                                       would like to submit the event.  \\
+                                       & \tabitem Bob clicks add event.  \\
+                                       & \tabitem Bob can now view his newly
+                                       added event. \\
+                                       \midrule
+\end{tabularx}
+\end{table}
+
+\section{Use cases}
+The list of use cases here is not exhaustive, but gives a general idea of the
+basic functionality the system should have. As we progress, it will be further
+developed. There is an overlap between both the user and the back end system on
+some of the cases, this is going to be clearly outlined in the diagram.
+\begin{itemize}
+\item \textbf{Add calendar}
+\item \textbf{Add event}
+\item \textbf{Add calendar from URL}
+\item \textbf{Add }
+\end{itemize}
+
+\end{document}
