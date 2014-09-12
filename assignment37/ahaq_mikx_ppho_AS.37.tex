@@ -96,7 +96,6 @@ Phillip Phoelich (ppho)\\
 \end{table}
 
 \clearpage
-
 \section{Actors}
 The actors identified in this section have been selected based on both users and
 back end system. The intermediary layers (if any) are also here
@@ -105,8 +104,6 @@ back end system. The intermediary layers (if any) are also here
   events to his client.
 \item \textbf{Client/Front end} - The client program that the user uses to view
   his calendar.
-\item \textbf{Back end} - The server that should store calendar data from
-  providers and user data.
 \item \textbf{Provider} - A provider is a user that provides calendar data to be
   used in the system. A user can subscribe to a calendar from a provider.
 \end{itemize}
@@ -163,6 +160,74 @@ some of the cases, this is going to be clearly outlined in the diagram.
 \item \textbf{Remove event}
 \item \textbf{Unsubscribe from calendar}
 \item \textbf{Switch view day/week/month}
+\item \textbf{Select which calendars to view}
 \end{itemize}
+
+Subscribing to a calendar is a sub-case of adding af calendar. Unsubscribing is
+thus also a sub-case of removing a calendar.
+
+\subsection{Diagram}
+
+\section{Non-trivial use cases}
+\begin{table}[H]
+\noindent \textbf{Subscribe calendar}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & SubscribeCalendar \\ \midrule
+\textit{Participating actor} & Initiated by User \\ \midrule
+\textit{Flow of events} & \tabitem User clicks the add calendar button\\
+                                       & \tabitem User selects a subscription
+                                       based calendar from the add calendar
+                                       event\\
+                                       & \tabitem User adds URL\\
+                                       & \tabitem User can now view added calendar events
+                                       in client\\
+                        \midrule
+\textit{Entry condition} & User clicks add calendar.\\ \midrule
+\textit{Exit condition} & \tabitem When user has successfully added a calendar. \\
+						& \tabitem User cancels the operation.\\
+                        \midrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\noindent \textbf{Add event}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & AddEvent \\ \midrule
+\textit{Participating actor} & Initiated by User \\ \midrule
+\textit{Flow of events} & \tabitem User clicks the add event button\\
+                                       & \tabitem User selects a calendar where
+                                       the event will be added.\\
+                                       & \tabitem User types details for event, such as
+                                       name, place, note.\\
+                                       & \tabitem User can now view event in selected calendar.\\
+                        \midrule
+\textit{Entry condition} & User clicks add event.\\ \midrule
+\textit{Exit condition} & \tabitem When user has successfully added  an event. \\
+						& \tabitem User cancels the operation.\\
+                        \midrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\noindent \textbf{Remove event}\\
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textit{Use case name} & RemoveEvent \\ \midrule
+\textit{Participating actor} & Initiated by User \\ \midrule
+\textit{Flow of events} & \tabitem User clicks an event\\
+                                       & \tabitem User selects remove/delete
+                                       event from context menu.\\
+                                       & \tabitem Users even has now been removed.\\
+                        \midrule
+\textit{Entry condition} & User clicks an event.\\ \midrule
+\textit{Exit condition} & \tabitem When user has successfully removed an event. \\
+						& \tabitem User cancels the operation.\\
+                        \midrule
+\end{tabularx}
+\end{table}
+
+\section{Initial Analysis Objects}
 
 \end{document}
