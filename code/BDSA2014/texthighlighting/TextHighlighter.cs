@@ -21,6 +21,7 @@ namespace texthighlighting
             new TextHighlighter();
         }
 
+        // These to are used to check for keywords in input from user.
         private readonly string[] _keywords = new[] { "exit", "help", "setfile", "show", "search" };
         private readonly Dictionary<string, string> _keywordDescriptions = new Dictionary<string, string>()
         {
@@ -28,7 +29,7 @@ namespace texthighlighting
             {"help", "help\tSee a list of all commands in Text Highlighter. Very helpful!"},
             {"setfile", "setfile [FILENAME]\tSet the file that you want to search through. A good place to start!"},
             {"show", "show\tShow the file as is, without searching in it. Pretty colours inbound!"},
-            {"search", "search [SEARCHTERM]\tSearch through the set file for the given search term. Now the fun begins!"}
+            {"search", "search \"[SEARCHTERM]\"\tSearch through the set file for the given search term. Now the fun begins!"}
         };
 
         public TextHighlighter()
@@ -96,7 +97,16 @@ namespace texthighlighting
                             continue;
                         }
                         // Highlighting the text can begin.
-                        HightlightText(file, tokens[1]);
+                        string searchTerm = "";
+                        for(int i = 1; i < tokens.Length; i++)
+                        {
+                            searchTerm += tokens[i];
+                            if (i < tokens.Length - 1)
+                            {
+                                searchTerm += " ";
+                            }
+                        }
+                        HightlightText(file, searchTerm);
                     }
                     else if (tokens[0].ToLower().Equals("help"))
                     {
@@ -121,74 +131,122 @@ namespace texthighlighting
         {
             // Fetch the text from the input file.
             string input = TextFileReader.ReadFile(inputFile);
-            string[] tokens = input.Split(' ');
-
-            foreach (string token in tokens)
+            List<ColouredString> colouredTokens = new List<ColouredString>()
             {
-                OrderedDictionary colouredTokens = new OrderedDictionary()
-                {
-                    {token, null}
-                };
+                {new ColouredString(input, ConsoleColor.White)}
+            };
 
-                FindUrls(ref colouredTokens);
+            // Urls.
+            for (int i = colouredTokens.Count-1; i >=0; i--)
+            {
+                Regex urlRegex = new Regex(@"(http|https|ftp|)\://{0,1}[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]", RegexOptions.IgnoreCase);
 
-                foreach (string colouredToken in colouredTokens.Keys)
-                {
-                    Console.ForegroundColor = (ConsoleColor)colouredTokens[colouredToken];
-                    Console.Write(colouredToken);
-                    Console.Write(" ");
-                }
-                
-                // Write a space between each word.
-                Console.Write(" ");
+                List<ColouredString> result = FindItems((colouredTokens[i]), urlRegex, ConsoleColor.Blue);
+                // Remove the old token and put in the new one(s).
+                colouredTokens.RemoveAt(i);
+                colouredTokens.InsertRange(i, result);
             }
+
+            // Dates.
+            for (int i = colouredTokens.Count-1; i >=0; i--)
+            {
+                Regex dateRegex = new Regex(@"((Mon|Tue|Wed|Thu|Fri|Sat|Sun|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\b)(\s?,?\s\d{2}\.?\s)?(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|January|February|March|April|May|June|July|August|September|October|November|December)?\s?(\d{4})?/?\s?(\d{2}\:\d{2}(\:\d{2})?)?", RegexOptions.IgnoreCase);
+
+                List<ColouredString> result = FindItems((colouredTokens[i]), dateRegex, ConsoleColor.Red);
+                // Remove the old token and put in the new one(s).
+                colouredTokens.RemoveAt(i);
+                colouredTokens.InsertRange(i, result);
+            }
+
+            // Search term.
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                for (int i = colouredTokens.Count - 1; i >= 0; i--)
+                {
+                    Regex dateRegex =
+                        new Regex(searchTerm, RegexOptions.IgnoreCase);
+
+                    List<ColouredString> result = FindItems((colouredTokens[i]), dateRegex, ConsoleColor.Yellow);
+                    // Remove the old token and put in the new one(s).
+                    colouredTokens.RemoveAt(i);
+                    colouredTokens.InsertRange(i, result);
+                }
+            }
+
+            for (int i = 0; i < colouredTokens.Count; i++)
+            {
+                ColouredString text = (ColouredString)colouredTokens[i];
+                Console.ForegroundColor = text.Colour;
+                Console.Write(text.Text);
+                Console.ResetColor();
+                //Console.Write(" ");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
-        private void FindUrls(ref OrderedDictionary tokens)
+        private List<ColouredString> FindItems(ColouredString token, Regex regex, ConsoleColor colour)
         {
-            OrderedDictionary colouredTokens = new OrderedDictionary();
-            Regex urlRegex = new Regex(@"(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$", RegexOptions.IgnoreCase);
-            foreach (string token in tokens.Keys)
+            List<ColouredString> colouredTokens = new List<ColouredString>();
+            // If there are no matches at all, return the full token.
+            if (!regex.IsMatch(token.Text))
             {
-                Match urlMatch = urlRegex.Match(token);
-                if (urlMatch.Success)
-                {
-                    // If there are "normal" words before the url.
-                    if (urlMatch.Index > 0)
-                    {
-                        colouredTokens[token.Substring(0, urlMatch.Index)] = ConsoleColor.White;
-                    }
-                    // Puts in the actual url.
-                    colouredTokens.Add(urlMatch.Value, ConsoleColor.Blue);
-                    // If there are "normal" words after the url.
-                    if (urlMatch.Index + urlMatch.Length < token.Length)
-                    {
-                        colouredTokens[token.Substring(urlMatch.Index + urlMatch.Length)] = ConsoleColor.White;
-                    }
-                }
-                else
-                {
-                    colouredTokens[token] = ConsoleColor.White;
-                }
+                colouredTokens.Add(new ColouredString(token.Text, token.Colour));
+                return colouredTokens;
             }
+
+            string currentToken = token.Text;
+            while (regex.IsMatch(currentToken))
+            {
+                Match match = regex.Match(currentToken);
+                // If there characters before the match.
+                if (match.Index > 0)
+                {
+                    colouredTokens.Add(new ColouredString(currentToken.Substring(0, match.Index),token.Colour));
+                }
+                // Puts in the actual match.
+                colouredTokens.Add(new ColouredString(match.Value, colour));
+
+                // Continue to find more matches in the rest of the string.
+                currentToken = currentToken.Substring(match.Index + match.Length);
+            }
+            colouredTokens.Add(new ColouredString(currentToken, token.Colour));
+
             // Return the new dictionary by asigning it to the parameter given.
-            tokens = colouredTokens;
+            return colouredTokens;
         }
 
-        private void WriteError(string message)
+        private static void WriteError(string message)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine(message);
             Console.ResetColor();
             Console.WriteLine();
         }
 
-        private void WriteSuccess(string message)
+        private static void WriteSuccess(string message)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(message);
             Console.ResetColor();
             Console.WriteLine();
+        }
+
+        private class ColouredString
+        {
+            public string Text { get; set; }
+            public ConsoleColor Colour { get; set; }
+            public ColouredString(string text, ConsoleColor colour)
+            {
+                Text = text;
+                Colour = colour;
+            }
+
+            public new string ToString()
+            {
+                return Text;
+            }
         }
 
     }
