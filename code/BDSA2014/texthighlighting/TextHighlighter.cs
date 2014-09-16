@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using BDSA13;
 
 namespace texthighlighting
@@ -163,10 +160,26 @@ namespace texthighlighting
             {
                 for (int i = colouredTokens.Count - 1; i >= 0; i--)
                 {
-                    Regex dateRegex =
-                        new Regex(searchTerm, RegexOptions.IgnoreCase);
+                    Regex searchRegex;
+                    if (searchTerm.StartsWith("*") && searchTerm.EndsWith("*"))
+                    {
+                        string termWithoutStars = searchTerm.Remove(searchTerm.Length - 1).Remove(0, 1);
+                        searchRegex = new Regex(@"\b\w*(" + termWithoutStars + @"){1}\w*\b", RegexOptions.IgnoreCase);
+                    }
+                    else if (searchTerm.StartsWith("*"))
+                    {
+                        searchRegex = new Regex(@"\b\w*(" + searchTerm.Remove(0, 1) + @"){1}\b", RegexOptions.IgnoreCase);
+                    }
+                    else if (searchTerm.EndsWith("*"))
+                    {
+                        searchRegex = new Regex(@"\b(" + searchTerm.Remove(searchTerm.Length-1) + @"){1}\w*\b", RegexOptions.IgnoreCase);
+                    }
+                    else
+                    {
+                         searchRegex = new Regex(searchTerm, RegexOptions.IgnoreCase);
+                    }
 
-                    List<ColouredString> result = FindItems((colouredTokens[i]), dateRegex, ConsoleColor.Yellow);
+                    List<ColouredString> result = FindItems((colouredTokens[i]), searchRegex, ConsoleColor.Yellow);
                     // Remove the old token and put in the new one(s).
                     colouredTokens.RemoveAt(i);
                     colouredTokens.InsertRange(i, result);
@@ -179,7 +192,6 @@ namespace texthighlighting
                 Console.ForegroundColor = text.Colour;
                 Console.Write(text.Text);
                 Console.ResetColor();
-                //Console.Write(" ");
             }
 
             Console.WriteLine();
