@@ -97,15 +97,9 @@ Phillip Phoelich (ppho)\\
 
 \clearpage
 \section{Actors}
-The actors identified in this section have been selected based on both users and
-back end system. The intermediary layers (if any) are also here
 \begin{itemize}
 \item \textbf{User} - The end user of the system, who wants to add calendars or
   events to his client.
-\item \textbf{Client/Front end} - The client program that the user uses to view
-  his calendar.
-\item \textbf{Provider} - A provider is a user that provides calendar data to be
-  used in the system. A user can subscribe to a calendar from a provider.
 \end{itemize}
 
 \section{Scenarios}
@@ -154,17 +148,21 @@ developed. There is an overlap between both the user and the back end system on
 some of the cases, this is going to be clearly outlined in the diagram.
 \begin{itemize}
 \item \textbf{Add calendar}
+\item \textbf{Add online calendar}
 \item \textbf{Add event}
 \item \textbf{Add calendar from URL}
-\item \textbf{Remove calendar }
+\item \textbf{Subscribe to calendar}
+\item \textbf{Remove calendar}
+\item \textbf{Remove online calendar}
 \item \textbf{Remove event}
 \item \textbf{Unsubscribe from calendar}
-\item \textbf{Switch view day/week/month}
+\item \textbf{Switch view (day/week/month/year)}
 \item \textbf{Select which calendars to view}
 \end{itemize}
 
-Subscribing to a calendar is a sub-case of adding af calendar. Unsubscribing is
-thus also a sub-case of removing a calendar.
+Subscribing to a calendar and creating an online calendar are sub-cases of adding a calendar. Unsubscribing from a calendar and removing an online calendar are thus also sub-cases of removing a calendar.
+
+The difference between subscribing to a calendar and adding a calendar from URL is that the adding from URL copies the calender, whereas subscribing is like having viewing rights to another user's calendar and updates will be visible.
 
 \subsection{Diagram}
 
