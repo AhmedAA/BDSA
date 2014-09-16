@@ -227,5 +227,33 @@ The difference between subscribing to a calendar and adding a calendar from URL 
 \end{table}
 
 \section{Initial Analysis Objects}
+%%%%% Table 4-2 er på side 145 %%%%%
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{l X}
+\midrule
+\textbf{User} & The user that interacts with the system. Main function is adding
+  \texttt{Event}s and \texttt{Calendar}s. Removal is also included.\\ \midrule
+\textbf{Calendar} & A \texttt{Calendar} holds the events for a given
+  \texttt{User}. It can either be created by a \texttt{User} manually, or be
+  provided via an URL for subscription from a \texttt{Provider}. \\ \midrule
+\textbf{Event} & A \texttt{User} is able to add an event to his
+  \texttt{Calendar}. An event can only be added to a local calendar, or a calendar
+  that a user owns. An event can also be removed, and again only a user made
+  calendar.\\ \midrule
+\textbf{Provider} & A provider can upload a \texttt{Calendar} to the system, and
+  a \texttt{User} is then able to add this calendar and view \texttt{Event}s
+  from it.\\ \midrule
+\end{tabularx}
+\end{table}
+
+\section{Non-functional Requirements}
+\begin{itemize}
+\item A User must be able to successfully add a calendar in less than 30
+  seconds, typing excluded.
+\item A User must be able to add an event in less than 60 seconds, typing
+  excluded.
+\item A Provider must be able to add a calendar and publish it in less than 60
+  seconds, bandwidth and typing excluded.
+\end{itemize}
 
 \end{document}
