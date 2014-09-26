@@ -3,11 +3,12 @@ using System.Collections.Generic;
 
 namespace reversepolishcalculator
 {
+    [Obsolete] //See ReversePolishCalculatorV2 for the newest version.
     public class ReversePolishCalculator
     {
-        static void Main(string[] args)
+/*        static void Main(string[] args)
         {
-            // This calculator only takes one input string at a time. It could be expanded to take more late.
+            // This calculator only takes one input string at a time. It could be expanded to take more later.
             if (args.Length == 1)
             {
                 try
@@ -25,7 +26,8 @@ namespace reversepolishcalculator
             {
                 Console.WriteLine("Too few or too many inputs! Write one input only!");
             }
-        }
+            Console.ReadKey();
+        }*/
 
         // Input strings should be in the form of integers and operators, separated with a space.
         public static string Calculate(string input)
