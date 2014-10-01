@@ -92,17 +92,53 @@ Phillip Phoelich (ppho)\\
 1.0     & 9/9-2014 & First version of the document & ahaq, mikx, ppho \\
 1.1     & 16/9-2014& Finishing touches             & ahaq, mikx, ppho \\
 2.0     & 26/9-2014& Static and dynamic model added & ahaq, mikx, ppho \\
+3.0     & 1/10-2014 & Entirely restructered                    & ahaq\\
 \end{tabularx}
 \end{table}
 
 \clearpage
-\section{Actors}
+%% Generelle struktur %%
+%\section{Introduction}
+%\subsection{Purpose of the system}
+%\subsection{Scope of the system}
+%\subsection{Objectives and success criteria of the project}
+%\subsection{Definitions, acronyms, and abbreviations}
+%\subsection{References}
+%\subsection{Overview}
+%
+%\section{Current system}
+
+\section{Proposed system}
+\subsection{Actors}
 \begin{itemize}
 \item \textbf{User} - The end user of the system, who wants to add calendars or
   events to his client.
 \end{itemize}
 
-\section{Scenarios}
+%\subsection{Functional requirements}
+\subsection{Nonfunctional requirements}
+\begin{itemize}
+\item A User must be able to successfully add a calendar in less than 30
+  seconds, typing excluded.
+\item A User must be able to add an event in less than 60 seconds, typing
+  excluded.
+\item A User must be able to add a calendar and publish it in less than 60
+  seconds, bandwidth and typing excluded.
+\item If the internet connection is lost, the User must be able to continue working. Changes will be syncronised with online calendar on reconnection.
+\item Syncronising a calendar with the server should happen within 5 second, excluding differences in internet speeds.
+\end{itemize}
+
+%\subsubsection{Usability}
+%\subsubsection{Reliability}
+%\subsubsection{Performance}
+%\subsubsection{Supportability}
+%\subsubsection{Implementation}
+%\subsubsection{Interface}
+%\subsubsection{Packaging}
+%\subsubsection{Legal}
+%\subsection{System models}
+
+\subsubsection{Scenarios}
 \begin{table}[H]
 \noindent \textbf{Add calendar}\\
 \begin{tabularx}{\textwidth}{l X}
@@ -141,7 +177,7 @@ Phillip Phoelich (ppho)\\
 \end{tabularx}
 \end{table}
 
-\section{Use cases}
+\subsubsection{Use cases}
 The list of use cases here is not exhaustive, but gives a general idea of the
 basic functionality the system should have. As we progress, it will be further
 developed.
@@ -163,12 +199,12 @@ Subscribing to a calendar and creating an online calendar are sub-cases of addin
 
 The difference between subscribing to a calendar and adding a calendar from URL is that the adding from URL copies the calender, whereas subscribing is like having viewing rights to another user's calendar and updates will be visible.
 
-\subsection{Diagram}
+\clearpage
 \begin{figure}
 \includegraphics[scale=0.8]{use_case_diagram.png}
 \end{figure}
 
-\section{Non-trivial use cases}
+\subsubsection{Non-trivial use cases}
 \begin{table}[H]
 \noindent \textbf{Subscribe calendar}\\
 \begin{tabularx}{\textwidth}{l X}
@@ -228,7 +264,9 @@ The difference between subscribing to a calendar and adding a calendar from URL 
 \end{tabularx}
 \end{table}
 
-\section{Initial Analysis Objects}
+%\subsubsection{Use case model}
+\subsubsection{Object model}
+\subsubsection{Initial Analysis Objects}
 %%%%% Table 4-2 er på side 145 %%%%%
 \begin{table}[H]
 \begin{tabularx}{\textwidth}{l X}
@@ -243,22 +281,14 @@ The difference between subscribing to a calendar and adding a calendar from URL 
 \end{tabularx}
 \end{table}
 
-\section{Non-functional Requirements}
-\begin{itemize}
-\item A User must be able to successfully add a calendar in less than 30
-  seconds, typing excluded.
-\item A User must be able to add an event in less than 60 seconds, typing
-  excluded.
-\item A User must be able to add a calendar and publish it in less than 60
-  seconds, bandwidth and typing excluded.
-\item If the internet connection is lost, the User must be able to continue working. Changes will be syncronised with online calendar on reconnection.
-\item Syncronising a calendar with the server should happen within 5 second, excluding differences in internet speeds.
-\end{itemize}
-
 % Static model
 \input{static_model}
 
-% Dynamic model
+\subsubsection{Dynamic model}
 \input{dynamic_model}
+
+%\subsubsection{User interface}
+
+%\section{Glossary}
 
 \end{document}

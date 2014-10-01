@@ -1,10 +1,9 @@
 % Dynamic model
-\section{Dynamic Model}
 The non-trivial use cases have been mapped into sequence diagrams, with emphasis
 on entity, boundary, and control objects. For each use case, the following has
 been found.
 
-\subsection{Subscribe Calendar}
+\subsubsection{Subscribe Calendar}
 \begin{itemize}
 \item \textbf{Entity}: User
 \item \textbf{Boundary}: Calendars
@@ -15,7 +14,7 @@ been found.
 \includegraphics[scale=0.8]{subscribe.png}
 \end{figure}
 
-\subsection{Add Event}
+\subsubsection{Add Event}
 \begin{itemize}
 \item \textbf{Entity}: User
 \item \textbf{Boundary}: Calendars
@@ -27,7 +26,7 @@ been found.
 \includegraphics[scale=0.8]{addevent.png}
 \end{figure}
 
-\subsection{Remove Event}
+\subsubsection{Remove Event}
 \begin{itemize}
 \item \textbf{Entity}: User
 \item \textbf{Boundary}: Calendars
@@ -36,4 +35,23 @@ been found.
 
 \begin{figure}[h]
 \includegraphics[scale=0.8]{removeevent.png}
+\end{figure}
+
+\clearpage
+\subsubsection{State machines}
+\subsubsection{Subscribe calendar}
+\begin{figure}[h]
+\includegraphics[scale=0.70]{subcalendarstate.png}
+\end{figure}
+
+\clearpage
+\subsubsection{Add event}
+\begin{figure}[h]
+\includegraphics[scale=0.8]{addeventstate.png}
+\end{figure}
+
+\clearpage
+\subsubsection{Remove event}
+\begin{figure}[h]
+\includegraphics[scale=0.8]{eventremovestate.png}
 \end{figure}
