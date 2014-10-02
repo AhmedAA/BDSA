@@ -112,11 +112,13 @@ Phillip Phoelich (ppho)\\
 \subsection{Actors}
 \begin{itemize}
 \item \textbf{User} - The end user of the system, who wants to add calendars or
-  events to his client.
+  events to his client. A user is considered a moderately experienced PC user,
+  who is new to this specific system.
 \end{itemize}
 
 %\subsection{Functional requirements}
 \subsection{Nonfunctional requirements}
+\subsubsection{Usability}
 \begin{itemize}
 \item A User must be able to successfully add a calendar in less than 30
   seconds, typing excluded.
@@ -124,11 +126,29 @@ Phillip Phoelich (ppho)\\
   excluded.
 \item A User must be able to add a calendar and publish it in less than 60
   seconds, bandwidth and typing excluded.
-\item If the internet connection is lost, the User must be able to continue working. Changes will be syncronised with online calendar on reconnection.
-\item Syncronising a calendar with the server should happen within 5 second, excluding differences in internet speeds.
 \end{itemize}
-
-%\subsubsection{Usability}
+\subsubsection{Response time}
+\begin{itemize}
+\item Syncronising a calendar with the server should happen within 5 second,
+  excluding differences in internet speeds.
+\end{itemize}
+\subsubsection{Fault tolerance}
+\begin{itemize}
+\item If the internet connection is lost, the User must be able to continue
+  working. Changes will be syncronised with online calendar on reconnection.
+\end{itemize}
+\subsubsection{Robustness}
+\begin{itemize}
+\item An average user cannot give wrong input.
+\end{itemize}
+\subsubsection{Portability}
+\begin{itemize}
+\item The system should be able to be accessed from any given platform, running C\#.
+\end{itemize}
+\subsubsection{Extensibility}
+\begin{itemize}
+\item The way of storing calendars should be easily exchangeable.
+\end{itemize}
 %\subsubsection{Reliability}
 %\subsubsection{Performance}
 %\subsubsection{Supportability}
