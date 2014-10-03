@@ -55,9 +55,9 @@ namespace NorthWind.Model
         {
             using (var repo = new NorthWindContext())
             {
-                var order = new Order();
-                order.OrderDate = orderDate;
+                var order = new Order {OrderDate = orderDate};
                 repo.Orders.Add(order);
+                repo.SaveChanges();
             }
         }
     }
