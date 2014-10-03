@@ -62,7 +62,7 @@
 
 \HRule \\[0.4cm]
 
-{ \bfseries Assignment \#38 \\[0.5cm] 
+{ \bfseries Assignment \#39 \\[0.5cm] 
     {\small \today}} \\[0.7cm]
 
 \HRule \\ [6.5cm]
@@ -93,16 +93,32 @@ Phillip Phoelich (ppho)\\
 1.1     & 16/9-2014& Finishing touches             & ahaq, mikx, ppho \\
 2.0     & 26/9-2014& Static and dynamic model added & ahaq, mikx, ppho \\
 3.0     & 1/10-2014 & Entirely restructered                    & ahaq\\
+4.0     & 1/10-2014 & Architectural pattern added         & ahaq, ppho\\
 \end{tabularx}
 \end{table}
 
 \clearpage
 %% Generelle struktur %%
-%\section{Introduction}
+\section{Introduction}
 %\subsection{Purpose of the system}
 %\subsection{Scope of the system}
 %\subsection{Objectives and success criteria of the project}
-%\subsection{Definitions, acronyms, and abbreviations}
+\subsection{Definitions, acronyms, and abbreviations}
+The system will be developed using the Model-View-Controller (MVC) architectural
+design. MVC allows for the system to have a high level of cohesion (parts of the
+system which logically fit together), and be de-coupled (meaning that components
+can be switched without too much effort). This is the overall architecture to be
+used in the main components. The storage for the system, should use the
+decorator pattern, where the same base class can be used for multiple storage
+implementations. The database would then have one single interface, meaning that
+switching database should be rather straight forward.
+
+The drawbacks of using the MVC pattern, is that maintaining the entire project
+can seem rather tedious, and the project can seem rather vast as it grows. It
+can also seem rather complex to implement in smaller projects, due to the amount
+of work required to implement it. Since this system is rather small, it could be
+questioned rather or not this is optimal, but if the system is to be expanded,
+then this architectural design is to be preferred.
 %\subsection{References}
 %\subsection{Overview}
 %
