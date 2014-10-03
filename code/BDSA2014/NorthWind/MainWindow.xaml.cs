@@ -33,7 +33,7 @@ namespace NorthWind
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(Products[0].Name);
+            new NewOrderWindow();
         }
 
         public void AddOrder()//int id, DateTime orderDate)

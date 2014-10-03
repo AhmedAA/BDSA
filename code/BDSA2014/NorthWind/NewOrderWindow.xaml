@@ -1,8 +1,9 @@
-﻿<Window x:Class="NorthWind.NewOrderWindow"
+﻿<Window x:Class="NorthWind.Model.NewOrderWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="NewOrderWindow" Height="300" Width="300">
     <Grid>
-        
+        <DatePicker HorizontalAlignment="Left" Margin="23,60,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>
