@@ -12,7 +12,7 @@ namespace NorthWind.Model
 
         static NorthWindContext()
         {
-            Database.SetInitializer(new NullDatabaseInitializer<NorthWindContext>());
+            
         }
 
         public DbSet<Product> Products { get; set; }
