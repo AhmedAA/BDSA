@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NorthWind
+namespace NorthWind.Model
 {
-    class Order
+    public class Order
     {
-        public int OrderID { get; set; }
+        [Column("OrderID")]
+        public int Id { get; set; }
         //public Customer Customer { get; set; }
         //public Employee Employee { get; set; }
+        [Column("OrderDate")]
         public DateTime OrderDate { get; set; }
         //public DateTime RequiredDate { get; set; }
         //public DateTime ShippedDate { get; set; }
@@ -26,7 +24,7 @@ namespace NorthWind
 
         public Order(string[] csvArray)
         {
-            OrderID = Int32.Parse(csvArray[0]);
+            Id = Int32.Parse(csvArray[0]);
             OrderDate = DateTime.Parse(csvArray[3]);
         }
 
