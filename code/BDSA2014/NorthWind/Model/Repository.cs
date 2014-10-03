@@ -51,9 +51,14 @@ namespace NorthWind.Model
             }
         }
 
-        public void CreateOrder()
+        public void CreateOrder(DateTime orderDate)
         {
-            throw new NotImplementedException();
+            using (var repo = new NorthWindContext())
+            {
+                var order = new Order();
+                order.OrderDate = orderDate;
+                repo.Orders.Add(order);
+            }
         }
     }
 }

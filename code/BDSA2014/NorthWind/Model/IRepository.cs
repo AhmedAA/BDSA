@@ -1,10 +1,12 @@
-﻿namespace NorthWind.Model
+﻿using System;
+
+namespace NorthWind.Model
 {
     interface IRepository
     {
         Product[] Products { get; }
         Order[] Orders { get; }
         Category[] Categories { get; }
-        void CreateOrder();
+        void CreateOrder(DateTime orderDate);
     }
 }
