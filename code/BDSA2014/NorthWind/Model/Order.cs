@@ -27,6 +27,6 @@ namespace NorthWind.Model
             Id = Int32.Parse(csvArray[0]);
             OrderDate = DateTime.Parse(csvArray[3]);
         }
-
+        public Order() { }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NorthWind.Model;
@@ -21,7 +22,8 @@ namespace NorthWind
     /// </summary>
     public partial class MainWindow : Window, INorthWind
     {
-        private IRepository repo = new FakeRepo();
+        
+        private IRepository repo = new Repository();
 
         public MainWindow()
         {
@@ -33,7 +35,7 @@ namespace NorthWind
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(Products[0].Name);
+           // new NewOrderWindow();
         }
 
         public void AddOrder()//int id, DateTime orderDate)

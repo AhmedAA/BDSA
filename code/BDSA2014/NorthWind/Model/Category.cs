@@ -19,5 +19,6 @@ namespace NorthWind.Model
             Id = Int32.Parse(csvArray[0]);
             Name = csvArray[1];
         }
+        public Category() { }
     }
 }
