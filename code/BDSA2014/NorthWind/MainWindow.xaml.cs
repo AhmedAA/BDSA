@@ -18,19 +18,36 @@ namespace NorthWind
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INorthWind
     {
+        private IRepository repo;
+
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            new 
         }
 
 
+
+
+        public void AddOrder()//int id, DateTime orderDate)
+        {
+            repo.CreateOrder();
+        }
+
+        public Product[] Products
+        {
+            get { return repo.Products; }
+        }
+
+        public Order[] Orders
+        {
+            get { return repo.Orders; }
+        }
     }
 }

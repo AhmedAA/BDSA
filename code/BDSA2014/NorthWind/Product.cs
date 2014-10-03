@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind
 {
-    public class Product : DbContext
+    public class Product
     {
     }
 }

@@ -7,14 +7,14 @@
             <TabItem Header="Products">
                 <Grid Background="#FFE5E5E5">
                     <ScrollViewer HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="382">
-                        <DataGrid Name="ProductGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" Width="363" DataContext="{Binding Products}"/>
+                        <DataGrid Name="ProductGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" Width="363" DataContext="{Binding Products, NotifyOnSourceUpdated=True}"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
             <TabItem Header="Orders">
                 <Grid Background="#FFE5E5E5">
                 <ScrollViewer HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="382">
-                    <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" Width="363" DataContext="Orders"/>
+                        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" Width="363" DataContext="{Binding Orders, NotifyOnSourceUpdated=True}"/>
                 </ScrollViewer>
                 </Grid>
             </TabItem>

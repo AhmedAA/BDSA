@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind
 {
-    class Order
+    public class Order
     {
         public int OrderID { get; set; }
         //public Customer Customer { get; set; }
