@@ -14,8 +14,8 @@ namespace NorthWind.Model
             {
                 return new Product[]
                 {
-                    new Product(new[] {"1", "Product1", "20.0", "1"}),
-                    new Product(new[] {"2", "Product2", "10.0", "1"})
+                    new Product(new[] {"1","Chai","1","1","10 boxes x 20 bags","18","39","0","10","0"}),
+                    new Product(new[] {"2","Product2","1","1","10 boxes x 20 bags","18","39","0","10","0"})
                 };
             }
         }
@@ -26,8 +26,8 @@ namespace NorthWind.Model
             {
                 return new Order[]
                 {
-                    new Order(new[] {"1", "2014-09-15 00:00:00"}),
-                    new Order(new[] {"2", "2014-09-20 00:00:00"})
+                    new Order(new[] {"1","VINET","5","1996-07-04 00:00:00","1996-08-01 00:00:00","1996-07-16 00:00:00","3","32.38","Vins et alcools Chevalier","59 rue de l'Abbaye","Reims",null,"51100","France"}),
+                    new Order(new[] {"2","ORDER2","5","2005-02-24 00:00:00","2005-02-24 00:00:00","2005-02-24 00:00:00","3","32.38","Vins et alcools Chevalier","59 rue de l'Abbaye","Reims",null,"51100","France"})
                 };
             }
         }
@@ -38,8 +38,8 @@ namespace NorthWind.Model
             {
                 return new Category[]
                 {
-                    new Category(new[] {"1", "Category1"}),
-                    new Category(new[] {"2", "Category2"})
+                    new Category(new[] {"1","Beverages","Soft drinks, coffees, teas, beers, and ales"}),
+                    new Category(new[] {"2","Condiments","Sweet and savory sauces, relishes, spreads, and seasonings"})
                 };
             }
         }
