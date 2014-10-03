@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NorthWind.Model;
 
 namespace NorthWind
 {
@@ -20,20 +21,20 @@ namespace NorthWind
     /// </summary>
     public partial class MainWindow : Window, INorthWind
     {
-        private IRepository repo;
+        private IRepository repo = new FakeRepo();
 
         public MainWindow()
         {
+            
             InitializeComponent();
+            ProductGrid.DataContext = Products;
+            OrderGrid.DataContext = Orders;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new 
+            Console.WriteLine(Products[0].Name);
         }
-
-
-
 
         public void AddOrder()//int id, DateTime orderDate)
         {
