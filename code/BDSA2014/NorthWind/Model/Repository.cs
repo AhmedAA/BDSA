@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Model
 {
-    class Repository : IRepository
+    public class Repository : IRepository
     {
         public Product[] Products
         {

@@ -26,5 +26,7 @@ namespace NorthWind.Model
             UnitPrice = Decimal.Parse(csvArray[5]);
             CategoryId = Int32.Parse(csvArray[3]);
         }
+
+        public Product(){}
     }
 }

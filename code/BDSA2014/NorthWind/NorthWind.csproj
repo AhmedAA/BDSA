@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>NorthWind.Model.CsvLoader</StartupObject>
+    <StartupObject>NorthWind.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -96,15 +96,8 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewOrderWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NewOrderWindow.xaml.cs">
-      <DependentUpon>NewOrderWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\NorthWindContext.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
