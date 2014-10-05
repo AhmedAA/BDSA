@@ -10,19 +10,47 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using NorthWind.Model;
 
 namespace NorthWind
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INorthWind
     {
+        
+        private IRepository repo = new Repository();
+
         public MainWindow()
         {
+            
             InitializeComponent();
+            ProductGrid.DataContext = Products;
+            OrderGrid.DataContext = Orders;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+           // new NewOrderWindow();
+        }
+
+        public void AddOrder()//int id, DateTime orderDate)
+        {
+            repo.CreateOrder();
+        }
+
+        public Product[] Products
+        {
+            get { return repo.Products; }
+        }
+
+        public Order[] Orders
+        {
+            get { return repo.Orders; }
         }
     }
 }

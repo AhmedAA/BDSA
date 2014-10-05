@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NorthWind
+namespace NorthWind.Model
 {
-    class Product
+    public static class ExtensionMethods
     {
+        
     }
 }

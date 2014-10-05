@@ -68,7 +68,7 @@ namespace testReversepolishcalculator
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
-        public void TestTooFewValues()
+        public void TestNotEnoughValues()
         {
             new ReversePolishCalculatorV2("8 +");
         }
