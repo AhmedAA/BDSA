@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="583.532" Width="694.103">
     <Grid>
-        <TabControl HorizontalAlignment="Left" Height="535" Margin="10,10,0,0" VerticalAlignment="Top" Width="668">
+        <TabControl HorizontalAlignment="Left" Height="535" Margin="10,10,0,0" VerticalAlignment="Top" Width="514">
             <TabItem Header="Products">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#FFE5E5E5" Margin="0,0,26,0.4">
                     <DataGrid Name="ProductGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="260" Width="363" ItemsSource="{Binding}"/>
                 </Grid>
             </TabItem>
@@ -15,7 +15,20 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button Content="Create New Order" HorizontalAlignment="Left" Margin="553,10,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click" Height="21"/>
-
+        <StackPanel Margin="529,36,10,10.2">
+        <Label Content="Name" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <Label Content="Address" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+            <TextBox x:Name="AddressBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+            <Label Content="city" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+            <TextBox x:Name="CityBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <Label Content="Region" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+            <TextBox x:Name="RegionBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <Label Content="Postal Code" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+            <TextBox x:Name="PostalCodeBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <Label Content="Country" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
+            <TextBox x:Name="CountryBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <Button HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click" Height="21" Content="Add New Order"/>
+        </StackPanel>
     </Grid>
 </Window>

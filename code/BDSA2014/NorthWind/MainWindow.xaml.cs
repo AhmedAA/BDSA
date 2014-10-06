@@ -35,12 +35,18 @@ namespace NorthWind
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           // new NewOrderWindow();
+            AddOrder();
         }
 
-        public void AddOrder()//int id, DateTime orderDate)
+        public void AddOrder()
         {
-            repo.CreateOrder();
+           // int id = repo.Orders.LastOrDefault().Id; skal gøres i repo
+            //set { repo.
+            string name = NameBox.GetLineText(0);
+            string address = AddressBox.GetLineText(0);
+            Console.WriteLine(name + "  " + address);
+           // repo.CreateOrder();
+            //TODO NewOrderEvent – an event notifying subscribers whenever the above method is called using a NewOrderEventArgs with the order as a property
         }
 
         public Product[] Products

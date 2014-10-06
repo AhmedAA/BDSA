@@ -51,11 +51,17 @@ namespace NorthWind.Model
             }
         }
 
-        public void CreateOrder(DateTime orderDate)
+        public void CreateOrder()
         {
             using (var repo = new NorthWindContext())
             {
-                var order = new Order {OrderDate = orderDate};
+                
+                var order = new Order
+                {
+                    OrderDate = DateTime.Today,
+                    Id = repo.Orders.LastOrDefault().Id + 1,
+          
+                };
                 repo.Orders.Add(order);
                 repo.SaveChanges();
             }
