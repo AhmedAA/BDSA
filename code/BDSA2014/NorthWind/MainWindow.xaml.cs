@@ -44,8 +44,12 @@ namespace NorthWind
             //set { repo.
             string name = NameBox.GetLineText(0);
             string address = AddressBox.GetLineText(0);
-            Console.WriteLine(name + "  " + address);
-           // repo.CreateOrder();
+            string city = CityBox.GetLineText(0);
+            string region = RegionBox.GetLineText(0);
+            string postalCode = PostalCodeBox.GetLineText(0);
+            string country = CountryBox.GetLineText(0);
+
+             repo.CreateOrder(name, address, city, region, postalCode, country);
             //TODO NewOrderEvent – an event notifying subscribers whenever the above method is called using a NewOrderEventArgs with the order as a property
         }
 

@@ -9,6 +9,7 @@ namespace NorthWind.Model
 {
     public class Repository : IRepository
     {
+        private static int orderId = 50000;
         public Product[] Products
         {
             get
@@ -60,8 +61,13 @@ namespace NorthWind.Model
                 var order = new Order
                 {
                     OrderDate = DateTime.Today,
-                    Id = repo.Orders.LastOrDefault().Id + 1,
-
+                    Id = orderId++,
+                    ShipName = name,
+                    ShipAddress = address,
+                    ShipCity = city,
+                    ShipRegion = region,
+                    ShipPostalCode = postalCode,
+                    ShipCountry = country
                 };
                 repo.Orders.Add(order);
                 repo.SaveChanges();
