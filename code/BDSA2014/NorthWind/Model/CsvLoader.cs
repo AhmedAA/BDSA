@@ -18,7 +18,7 @@ namespace NorthWind.Model
 
         public static Category[] Categories { get; set; }
 
-        static void LoadFromCsvIntoDb()
+        public static void LoadFromCsvIntoDb()
         {
             LoadProducts("products.csv");
             LoadOrders("orders.csv");

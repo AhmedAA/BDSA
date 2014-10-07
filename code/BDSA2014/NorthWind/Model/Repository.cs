@@ -35,6 +35,7 @@ namespace NorthWind.Model
                     return allOrders.ToArray();
                 }
             }
+            
         }
 
         public Category[] Categories
@@ -51,16 +52,16 @@ namespace NorthWind.Model
             }
         }
 
-        public void CreateOrder()
+        public void CreateOrder(string name, string address, string city, string region, string postalCode, string country)
         {
             using (var repo = new NorthWindContext())
             {
-                
+
                 var order = new Order
                 {
                     OrderDate = DateTime.Today,
                     Id = repo.Orders.LastOrDefault().Id + 1,
-          
+
                 };
                 repo.Orders.Add(order);
                 repo.SaveChanges();

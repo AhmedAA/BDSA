@@ -19,13 +19,20 @@ namespace NorthWind.Model
         public string ShipAddress { get; set; }
         public string ShipCity { get; set; }
         public string ShipRegion { get; set; }
-        public int ShipPostalCode { get; set; }
+        public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
         public Order(string[] csvArray)
         {
             Id = Int32.Parse(csvArray[0]);
             OrderDate = DateTime.Parse(csvArray[3]);
+            ShipName = csvArray[8];
+            ShipAddress = csvArray[9];
+            ShipCity = csvArray[10];
+            ShipRegion = csvArray[11];
+            ShipPostalCode = csvArray[12];
+            ShipCountry = csvArray[13];
+
         }
         public Order() { }
     }

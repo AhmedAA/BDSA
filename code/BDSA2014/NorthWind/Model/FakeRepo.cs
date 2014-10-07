@@ -44,7 +44,7 @@ namespace NorthWind.Model
             }
         }
 
-        public void CreateOrder(DateTime orderDate)
+        public void CreateOrder(string name, string address, string city, string region, string postalCode, string country)
         {
             throw new NotImplementedException();
         }

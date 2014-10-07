@@ -24,7 +24,7 @@ namespace NorthWind
     {
         
         private IRepository repo = new Repository();
-
+     //   private Func<INotifyEvent> 
         public MainWindow()
         {
             
@@ -40,7 +40,7 @@ namespace NorthWind
 
         public void AddOrder()
         {
-           // int id = repo.Orders.LastOrDefault().Id; skal gøres i repo
+           // int id = repo.Orders.LastOrDefault().Id; //skal gøres i repo
             //set { repo.
             string name = NameBox.GetLineText(0);
             string address = AddressBox.GetLineText(0);
@@ -51,12 +51,41 @@ namespace NorthWind
 
         public Product[] Products
         {
-            get { return repo.Products; }
+            get
+            {
+                try
+                {
+                    return repo.Products;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error fetching products: " + e.Message);
+                    return null;
+                }
+            }
         }
+        
 
         public Order[] Orders
         {
-            get { return repo.Orders; }
+            get
+            {
+                try
+                {
+                    return repo.Orders; 
+                    
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error fetching orders: "+ e.Message);
+                    return null;
+                }
+            }
         }
+
+/*        public void Notify(NotifyEvent ne)
+        {
+            
+        }*/
     }
 }
