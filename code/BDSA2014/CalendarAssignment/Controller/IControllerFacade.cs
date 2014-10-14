@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using CalendarAssignment.Model;
+using CalendarAssignment.Model.Event;
 
 namespace CalendarAssignment.Controller
 {

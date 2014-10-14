@@ -60,6 +60,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Event\EventGroup.cs" />
+    <Compile Include="Model\Event\EventItem.cs" />
+    <Compile Include="Storage\DbStorage.cs" />
+    <Compile Include="Storage\GoogleCalendar\GoogleCalendar.cs" />
+    <Compile Include="Storage\GoogleCalendar\GoogleCalendarAdapter.cs" />
+    <Compile Include="Storage\TestStorage.cs" />
+    <Compile Include="Storage\FileStorage.cs" />
+    <Compile Include="Storage\IStorage.cs" />
     <Compile Include="View\IView.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -78,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Calendar.cs" />
-    <Compile Include="Model\Event.cs" />
+    <Compile Include="Model\Event\Event.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
