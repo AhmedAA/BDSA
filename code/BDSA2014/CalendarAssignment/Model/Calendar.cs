@@ -8,5 +8,8 @@ namespace CalendarAssignment.Model
 {
     class Calendar
     {
+        public string Title { get; set; }
+        public bool IsPublicCalendar { get; set; }
+        public bool IsSynced { get; set; }
     }
 }

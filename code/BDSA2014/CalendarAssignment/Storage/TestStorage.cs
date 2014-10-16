@@ -12,6 +12,16 @@ namespace CalendarAssignment.Storage
         private List<Calendar> _calendarList = new List<Calendar>();
         private List<User> _userList = new List<User>();
 
+        public void SetCalendarList(List<Calendar> calendarList)
+        {
+            _calendarList = calendarList;
+        }
+
+        public void SetUserList(List<User> userList)
+        {
+            _userList = userList;
+        }
+
         public void CreateCalendar(Calendar calendar)
         {
             throw new NotImplementedException();

@@ -63,6 +63,10 @@
     <Compile Include="Model\Event\EventGroup.cs" />
     <Compile Include="Model\Event\EventItem.cs" />
     <Compile Include="Storage\DbStorage.cs" />
+    <Compile Include="Storage\Factory\DbStorageFactory.cs" />
+    <Compile Include="Storage\Factory\FileStorageFactory.cs" />
+    <Compile Include="Storage\Factory\IStorageFactory.cs" />
+    <Compile Include="Storage\Factory\TestStorageFactory.cs" />
     <Compile Include="Storage\GoogleCalendar\GoogleCalendar.cs" />
     <Compile Include="Storage\GoogleCalendar\GoogleCalendarAdapter.cs" />
     <Compile Include="Storage\TestStorage.cs" />
