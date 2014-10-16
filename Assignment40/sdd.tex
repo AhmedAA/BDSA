@@ -90,6 +90,7 @@ Phillip Phoelich (ppho)\\
 \begin{tabularx}{\textwidth}{l l X l}
 \textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\ \midrule
 1.0     & 9/9-2014 & First version of the SDD & ahaq, mikx, ppho \\
+1.1     & 16/10-2014 & Added subsystem service diagram & ahaq\\
 \end{tabularx}
 \end{table}
 
@@ -237,11 +238,11 @@ synchronised. If the checksum is incomplete, or in any other way suspected to be
 corrupted, then the last calendar with a valid checksum should be retrieved.
 
 \section{Subsystem services}
-RequestCalendar: Client -> Server\\
-RequestUser: Client -> Server\\
-
-SynchroniseCalendar: Client -> Server \&\& Server -> Client\\
-SynchroniseUserData: Client -> Server \&\& Server -> Client\\
+\begin{center}
+  \begin{figure}[H]
+    \includegraphics[scale=1.0]{subsystemservices.png}
+  \end{figure}
+\end{center}
 
 The server should present an interface for the client to use.  A client must be
 able to fetch calendar and correct user data from the server, through these
