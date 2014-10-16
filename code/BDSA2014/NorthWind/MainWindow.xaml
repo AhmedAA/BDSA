@@ -5,29 +5,34 @@
     <Grid>
         <TabControl HorizontalAlignment="Left" Height="535" Margin="10,10,0,0" VerticalAlignment="Top" Width="514">
             <TabItem Header="Products">
-                <Grid Background="#FFE5E5E5" Margin="0,0,-1,0.4">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
                     <DataGrid Name="ProductGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="482" Width="485" ItemsSource="{Binding}" Margin="10,10,0,0"/>
                 </Grid>
             </TabItem>
+            <TabItem Header="Categories">
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+                    <DataGrid Name="CategoryGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="482" Width="485" ItemsSource="{Binding}" Margin="10,10,0,0"/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Orders">
-                <Grid Background="#FFE5E5E5" Margin="0,-2,-4,-0.6">
-                    <DataGrid Name="OrderGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="482" Width="488" ItemsSource="{Binding}" Margin="10,10,0,0"/>
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0">
+                    <DataGrid Name="OrderGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Height="482" Width="485" ItemsSource="{Binding}" Margin="10,10,0,0"/>
                 </Grid>
             </TabItem>
         </TabControl>
         <StackPanel Margin="529,36,10,10.2">
             <Label Content="Name" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
-            <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Label Content="Address" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
             <TextBox x:Name="AddressBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Label Content="city" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
-            <TextBox x:Name="CityBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="CityBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Label Content="Region" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
-            <TextBox x:Name="RegionBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="RegionBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Label Content="Postal Code" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
-            <TextBox x:Name="PostalCodeBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="PostalCodeBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Label Content="Country" HorizontalAlignment="Left" Height="21" Margin="0,0,0,0" VerticalAlignment="Top" Width="98" FontSize="10"/>
-            <TextBox x:Name="CountryBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" />
+            <TextBox x:Name="CountryBox" HorizontalAlignment="Left" Height="23" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
             <Button HorizontalAlignment="Left" Margin="0,20,0,0" VerticalAlignment="Top" Width="106" Click="Button_Click" Height="21" Content="Add New Order"/>
         </StackPanel>
     </Grid>

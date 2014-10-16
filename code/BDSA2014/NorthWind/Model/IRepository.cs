@@ -2,7 +2,7 @@
 
 namespace NorthWind.Model
 {
-    interface IRepository
+    public interface IRepository
     {
         Product[] Products { get; }
         Order[] Orders { get; }
