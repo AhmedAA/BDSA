@@ -60,6 +60,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Controller\ControllerFacade.cs" />
     <Compile Include="Model\Event\EventGroup.cs" />
     <Compile Include="Model\Event\EventItem.cs" />
     <Compile Include="Storage\DbStorage.cs" />
@@ -67,8 +69,17 @@
     <Compile Include="Storage\Factory\FileStorageFactory.cs" />
     <Compile Include="Storage\Factory\IStorageFactory.cs" />
     <Compile Include="Storage\Factory\TestStorageFactory.cs" />
+    <Compile Include="Commands\CommandQueue.cs" />
+    <Compile Include="Storage\GoogleCalendar\GCreateCalendarCommand.cs" />
+    <Compile Include="Storage\GoogleCalendar\GCreateEventCommand.cs" />
+    <Compile Include="Storage\GoogleCalendar\GDeleteEvent.cs" />
     <Compile Include="Storage\GoogleCalendar\GoogleCalendar.cs" />
     <Compile Include="Storage\GoogleCalendar\GoogleCalendarAdapter.cs" />
+    <Compile Include="Storage\Online\AOnlineStorage.cs" />
+    <Compile Include="Storage\StorageContext.cs" />
+    <Compile Include="Storage\Strategy\NotConnectedStrategy.cs" />
+    <Compile Include="Storage\Strategy\ConnectedStrategy.cs" />
+    <Compile Include="Storage\Strategy\IUponUpdateStrategy.cs" />
     <Compile Include="Storage\TestStorage.cs" />
     <Compile Include="Storage\FileStorage.cs" />
     <Compile Include="Storage\IStorage.cs" />
