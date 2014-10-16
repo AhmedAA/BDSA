@@ -22,15 +22,16 @@ namespace NorthWind
     /// </summary>
     public partial class MainWindow : Window, INorthWind
     {
-        
-        private IRepository repo = new Repository();
+
+        private IRepository repo;
      //   private Func<INotifyEvent> 
-        public MainWindow()
+        public MainWindow(IRepository repo) : base()
         {
-            
+            this.repo = repo;
             InitializeComponent();
             ProductGrid.DataContext = Products;
             OrderGrid.DataContext = Orders;
+            CategoryGrid.DataContext = Category;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,7 +49,6 @@ namespace NorthWind
             string region = RegionBox.GetLineText(0);
             string postalCode = PostalCodeBox.GetLineText(0);
             string country = CountryBox.GetLineText(0);
-
              repo.CreateOrder(name, address, city, region, postalCode, country);
             //TODO NewOrderEvent – an event notifying subscribers whenever the above method is called using a NewOrderEventArgs with the order as a property
         }
@@ -87,6 +87,21 @@ namespace NorthWind
             }
         }
 
+        public Category[] Category
+        {
+            get
+            {
+                try
+                {
+                    return repo.Categories;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error fetching Categories: " + e.Message);
+                    return null;
+                }
+            }
+        }
 /*        public void Notify(NotifyEvent ne)
         {
             

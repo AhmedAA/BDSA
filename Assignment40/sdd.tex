@@ -62,7 +62,7 @@
 
 \HRule \\[0.4cm]
 
-{ \bfseries Assignment \#39 \\[0.5cm] 
+{ \bfseries SDD \\[0.5cm] 
     {\small \today}} \\[0.7cm]
 
 \HRule \\ [6.5cm]
@@ -90,6 +90,7 @@ Phillip Phoelich (ppho)\\
 \begin{tabularx}{\textwidth}{l l X l}
 \textbf{Version} & \textbf{Date} & \textbf{Description} & \textbf{Authors} \\ \midrule
 1.0     & 9/9-2014 & First version of the SDD & ahaq, mikx, ppho \\
+1.1     & 16/10-2014 & Added subsystem service diagram & ahaq\\
 \end{tabularx}
 \end{table}
 
@@ -220,6 +221,13 @@ The global control flow is handled via the MVC architecture (event driven). This
 means that there is a control that updates the view for the user, and the models
 used by the system behind.
 
+The views send the events to update the models. For instance if a user
+clicks the add calendar button, an event is dispatched and the view shows the
+add calendar form. If a user completes the action, an event is dispatched to
+show the calendar view, and to the model to create the calendar. For error
+handling/expanding the system, the model could send an event back to tell the
+user whether the action succeeded or not.
+
 \subsection{Boundary conditions}
 An admin to start the service and shut it down.
 The client is started by a user locally.
@@ -230,11 +238,11 @@ synchronised. If the checksum is incomplete, or in any other way suspected to be
 corrupted, then the last calendar with a valid checksum should be retrieved.
 
 \section{Subsystem services}
-RequestCalendar: Client -> Server\\
-RequestUser: Client -> Server\\
-
-SynchroniseCalendar: Client -> Server \&\& Server -> Client\\
-SynchroniseUserData: Client -> Server \&\& Server -> Client\\
+\begin{center}
+  \begin{figure}[H]
+    \includegraphics[scale=1.0]{subsystemservices.png}
+  \end{figure}
+\end{center}
 
 The server should present an interface for the client to use.  A client must be
 able to fetch calendar and correct user data from the server, through these
