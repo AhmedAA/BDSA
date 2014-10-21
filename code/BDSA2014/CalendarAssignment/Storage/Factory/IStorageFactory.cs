@@ -8,6 +8,6 @@ namespace CalendarAssignment.Storage.Factory
 {
     interface IStorageFactory
     {
-        public IStorage CreateStorage();
+        IStorage CreateStorage();
     }
 }

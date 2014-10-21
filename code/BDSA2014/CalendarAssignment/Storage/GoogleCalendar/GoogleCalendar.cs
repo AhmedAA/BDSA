@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CalendarAssignment.Commands;
 
 namespace CalendarAssignment.Storage.GoogleCalendar
 {
     class GoogleCalendar
     {
         public string ApiUri { get; set; }
+        private CommandQueue _commandQueue = new CommandQueue();
 
         public string GetCalendar(string calendarId)
         {
@@ -21,6 +23,11 @@ namespace CalendarAssignment.Storage.GoogleCalendar
         }
 
         public string UpdateCalendar(string calendarId, string title, string description, string location, string timeZone)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string DeleteCalendar(string calendarId)
         {
             throw new NotImplementedException();
         }
