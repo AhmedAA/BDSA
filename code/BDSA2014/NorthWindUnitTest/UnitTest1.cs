@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthWind.Model;
 
@@ -13,13 +14,16 @@ namespace NorthWindUnitTest
         [TestMethod]
         public void CreateAndGetOrderTest()
         {
-            using (var repo = new NorthWindContext())
+            using (var context = new NorthWindContext())
             {
+                var newestOrder = (from o in context.Orders
+                                   orderby o.Id descending
+                                   select o).First();
 
                 var order = new Order
                 {
                     OrderDate = DateTime.Today,
-                    Id = _repo.Orders.LastOrDefault().Id++,
+                    Id = newestOrder.Id+1,
                     ShipName = "test1",
                     ShipAddress = "test2",
                     ShipCity = "test3",
@@ -27,13 +31,11 @@ namespace NorthWindUnitTest
                     ShipPostalCode = "test5",
                     ShipCountry = "test6"
                 };
-                _repo.Orders.Add(order);
-                _repo.SaveChanges();
+                _repo.CreateOrder(order.ShipName, order.ShipAddress, order.ShipCity, order.ShipRegion, order.ShipPostalCode, order.ShipCountry);
 
-                Assert.AreEqual(_repo.Orders.Last(), order);
-                //TODO If true delete test order? 
+                Assert.AreEqual(_repo.Orders.Last(), order); 
+                //TODO If true delete test order?  === Yes! But not possible in our implementation yet...
             }
         }
-        //Hvad er mere værd at teste? 
     }
 }
