@@ -9,7 +9,6 @@ namespace NorthWind.Model
 {
     public class Repository : IRepository
     {
-        private static int orderId = 50000;
         public Product[] Products
         {
             get
@@ -61,7 +60,7 @@ namespace NorthWind.Model
                 var order = new Order
                 {
                     OrderDate = DateTime.Today,
-                    Id = orderId++,
+                    Id = repo.Orders.LastOrDefault().Id++,      //Databasen kunne selv gøre det her, men det var en del af opgaven
                     ShipName = name,
                     ShipAddress = address,
                     ShipCity = city,
