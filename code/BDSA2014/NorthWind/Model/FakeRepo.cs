@@ -8,6 +8,8 @@ namespace NorthWind.Model
 {
     class FakeRepo : IRepository
     {
+        public event EventHandler<NewOrderEventArgs> NewOrderEvent;
+
         public Product[] Products
         {
             get
@@ -46,6 +48,7 @@ namespace NorthWind.Model
 
         public void CreateOrder(string name, string address, string city, string region, string postalCode, string country)
         {
+            // TODO Implement the new order notification here!
             throw new NotImplementedException();
         }
     }

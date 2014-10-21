@@ -9,17 +9,27 @@ namespace NorthWind.Model
 {
     public class Repository : IRepository
     {
+        public event EventHandler<NewOrderEventArgs> NewOrderEvent;
+
+        private bool _productUpdated = true, _ordersUpdated = true, _categoriesUpdated = true;
+        private Product[] _productCache;
+        private Order[] _orderCache;
+        private Category[] _categoryCache;
+
         public Product[] Products
         {
             get
             {
+                if (!_productUpdated) return _productCache;
                 using (var repo = new NorthWindContext())
                 {
                     var allProducts = from p in repo.Products
                         select p;
 
-                    return allProducts.ToArray();
+                    _productCache = allProducts.ToArray();
+                    _productUpdated = false;
                 }
+                return _productCache;
             }
         }
 
@@ -27,40 +37,49 @@ namespace NorthWind.Model
         {
             get
             {
+                if (!_ordersUpdated) return _orderCache;
                 using (var repo = new NorthWindContext())
                 {
                     var allOrders = from o in repo.Orders
-                                      select o;
+                                    select o;
 
-                    return allOrders.ToArray();
+                    _orderCache = allOrders.ToArray();
+                    _ordersUpdated = false;
                 }
+                return _orderCache;
             }
-            
+
         }
 
         public Category[] Categories
         {
             get
             {
+                if (!_categoriesUpdated) return _categoryCache;
                 using (var repo = new NorthWindContext())
                 {
                     var allCategories = from a in repo.Categories
-                                      select a;
+                                        select a;
 
-                    return allCategories.ToArray();
+                    _categoryCache = allCategories.ToArray();
+                    _categoriesUpdated = false;
                 }
+                return _categoryCache;
             }
         }
 
         public void CreateOrder(string name, string address, string city, string region, string postalCode, string country)
         {
-            using (var repo = new NorthWindContext())
+            using (var context = new NorthWindContext())
             {
+                var newestOrder = (from o in context.Orders
+                                   orderby o.Id descending
+                                   select o).First();
 
                 var order = new Order
                 {
                     OrderDate = DateTime.Today,
-                    Id = repo.Orders.LastOrDefault().Id++,      //Databasen kunne selv gøre det her, men det var en del af opgaven
+                    Id = newestOrder.Id + 1,      //Databasen kunne selv gøre det her, men det var en del af opgaven
                     ShipName = name,
                     ShipAddress = address,
                     ShipCity = city,
@@ -68,8 +87,10 @@ namespace NorthWind.Model
                     ShipPostalCode = postalCode,
                     ShipCountry = country
                 };
-                repo.Orders.Add(order);
-                repo.SaveChanges();
+                context.Orders.Add(order);
+                context.SaveChanges();
+                NewOrderEvent(this, new NewOrderEventArgs() { OrderId = order.Id, OrderDate = order.OrderDate }); // Fire the new order event, when changes are saved to the database.
+                _ordersUpdated = true;
             }
         }
     }

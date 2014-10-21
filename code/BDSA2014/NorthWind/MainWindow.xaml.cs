@@ -34,10 +34,17 @@ namespace NorthWind
         public MainWindow(IRepository repo)
         {
             this.repo = repo;
+            this.repo.NewOrderEvent += repo_NewOrderEvent; // Subscribe to the new order event, to get notified, when a new order is added.
             InitializeComponent();
             ProductGrid.DataContext = Products;
             OrderGrid.DataContext = Orders;
             CategoryGrid.DataContext = Category;
+        }
+
+        void repo_NewOrderEvent(object sender, NewOrderEventArgs e)
+        {
+            var message = "New order with the ID: " + e.OrderId + ", created at: " + e.OrderDate.ToLongDateString();
+            MessageBox.Show(this, message, "New Order Created", MessageBoxButton.OK);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -106,9 +113,5 @@ namespace NorthWind
                 }
             }
         }
-/*        public void Notify(NotifyEvent ne)
-        {
-            
-        }*/
     }
 }
