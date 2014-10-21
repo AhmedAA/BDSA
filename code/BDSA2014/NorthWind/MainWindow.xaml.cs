@@ -22,10 +22,16 @@ namespace NorthWind
     /// </summary>
     public partial class MainWindow : Window, INorthWind
     {
+        //TODO NewOrderEvent – an event notifying subscribers whenever the above method is called using a NewOrderEventArgs with the order as a property
 
         private IRepository repo;
      //   private Func<INotifyEvent> 
-        public MainWindow(IRepository repo) : base()
+
+        /// <summary>
+        /// Constructor tager Repo interface som parameter, da dependency injection var en del af opgaven.
+        /// </summary>
+        /// <param name="repo"></param>
+        public MainWindow(IRepository repo)
         {
             this.repo = repo;
             InitializeComponent();
@@ -41,16 +47,14 @@ namespace NorthWind
 
         public void AddOrder()
         {
-           // int id = repo.Orders.LastOrDefault().Id; //skal gøres i repo
-            //set { repo.
+            //Id skal sættes i Repository
             string name = NameBox.GetLineText(0);
             string address = AddressBox.GetLineText(0);
             string city = CityBox.GetLineText(0);
             string region = RegionBox.GetLineText(0);
             string postalCode = PostalCodeBox.GetLineText(0);
             string country = CountryBox.GetLineText(0);
-             repo.CreateOrder(name, address, city, region, postalCode, country);
-            //TODO NewOrderEvent – an event notifying subscribers whenever the above method is called using a NewOrderEventArgs with the order as a property
+            repo.CreateOrder(name, address, city, region, postalCode, country);
         }
 
         public Product[] Products
