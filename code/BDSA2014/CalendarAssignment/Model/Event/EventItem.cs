@@ -16,6 +16,19 @@ namespace CalendarAssignment.Model.Event
         // This property is set from within the EventGroup class, when attached to a group.
         public EventGroup Group { get; set; }
 
+        /**
+         * Pre conditions
+         * context EventItem::EventItem pre:
+         *      isCalendarSelected()
+         * context EventItem::EventItem pre:
+         *      isDataSet()
+         *      
+         * Post conditions
+         * context EventItem::EventItem post:
+         *      isEventAdded()
+         * context EventItem::EventItem post:
+         *      isEventInCalendar()
+         */
         public EventItem(DateTime startDate, DateTime endDate, string title, string description = "")
         {
             StartDate = startDate;
@@ -24,6 +37,19 @@ namespace CalendarAssignment.Model.Event
             Description = description;
         }
 
+        /**
+         * Pre conditions
+         * context EventItem::ChangeDates pre:
+         *      isEventInCalendar()
+         * context EventItem::ChangeDates pre:
+         *      eventIsVisible()
+         *      
+         * Post conditions
+         * context EventItem::ChangeDates post:
+         *      isDateChanged()
+         * context EventItem::ChangeDates post:
+         *      isDateCorrect()
+         */
         public void ChangeDates(DateTime startDate, DateTime endDate)
         {
             StartDate = startDate;

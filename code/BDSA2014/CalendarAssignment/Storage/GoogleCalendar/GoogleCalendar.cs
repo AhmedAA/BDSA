@@ -7,6 +7,10 @@ using CalendarAssignment.Commands;
 
 namespace CalendarAssignment.Storage.GoogleCalendar
 {
+    /**
+     * Invariants:
+     * @invariant: There is only one user at a given time
+     */
     class GoogleCalendar
     {
         public string ApiUri { get; set; }

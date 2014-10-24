@@ -27,6 +27,20 @@ namespace CalendarAssignment.Commands
         /// Executes the command, currently at.
         /// </summary>
         /// <returns>Return true, if nothing went wrong and there are still commands left. Returns false if nothing went wrong, but no more commands are left. Throws an ApplicationException, if something went wrong.</returns>
+        /**
+         * Pre conditions:
+         * context CommandQueue::Execute() pre:
+         *      The state is valid
+         * context CommandQueue::Execute() pre:
+         *      _currentCommand > 1
+         * 
+         * Post conditions:
+         * context CommandQueue::Execute() post:
+         *      The state is valid
+         * context CommandQueue::Execute() post:
+         *      isCommandExecuted()
+         * All commands were executed, or none
+         */
         public bool Execute()
         {
             var success = _commands[_currentCommand].Execute();
@@ -39,6 +53,20 @@ namespace CalendarAssignment.Commands
             throw new ApplicationException("Command: " + _commands[_currentCommand] + " could not execute!");
         }
 
+        /**
+         * Pre conditions:
+         * context CommandQueue::Undo() pre:
+         *      isStateValid()
+         *      
+         * context CommandQueue::Undo() pre:
+         *      _currentCommand > 1
+         *      
+         * Post condition:
+         * context CommandQueue::Undo() post:
+         *      isStateValid()
+         * context CommandQueue::Undo() post:
+         *      wasCommandUndone()
+         */
         public bool Undo()
         {
             var success = _commands[_currentCommand].Undo();

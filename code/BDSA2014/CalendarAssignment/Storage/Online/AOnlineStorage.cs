@@ -25,6 +25,20 @@ namespace CalendarAssignment.Storage.Online
         {
             throw new NotImplementedException();
         }
+        
+        /**
+         * Pre conditions
+         * context AOnlineStorage::CreateCalendar pre:
+         *      isUserLoggedIn
+         * context AOnlineStorage::CreateCalendar pre:
+         *      isCalendarCreatedToUser
+         *      
+         * Post conditions
+         * context AOnlineStorage::CreateCalendar post:
+         *      isCalendarAdded
+         * context AOnlineStorage::CreateCalendar post:
+         *      calendarIsOnUser
+         */
         public abstract void CreateCalendar(Calendar calendar);
         public abstract Calendar[] ReadCalendars();
         public abstract Calendar[] ReadCalendars(User user);
