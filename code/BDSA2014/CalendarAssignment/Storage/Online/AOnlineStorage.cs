@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using CalendarAssignment.Model;
@@ -9,6 +10,7 @@ namespace CalendarAssignment.Storage.Online
 {
     abstract class AOnlineStorage : IStorage
     {
+        User _user = new User();
         public string Url { get; set; }
         public int Port { get; set; }
         /// <summary>
@@ -31,7 +33,6 @@ namespace CalendarAssignment.Storage.Online
          * context AOnlineStorage::CreateCalendar pre:
          *      isUserLoggedIn
          * context AOnlineStorage::CreateCalendar pre:
-         *      isCalendarCreatedToUser
          *      
          * Post conditions
          * context AOnlineStorage::CreateCalendar post:
@@ -39,7 +40,20 @@ namespace CalendarAssignment.Storage.Online
          * context AOnlineStorage::CreateCalendar post:
          *      calendarIsOnUser
          */
-        public abstract void CreateCalendar(Calendar calendar);
+
+        public void CreateCalendar(Calendar calendar)
+        {
+            if (_user.IsLoggedIn)
+            {
+                ProtectedCreateCalendar();
+            }
+            else
+            {
+                throw new Exception("No user logged in");
+            }          
+        }
+
+        protected abstract void ProtectedCreateCalendar();
         public abstract Calendar[] ReadCalendars();
         public abstract Calendar[] ReadCalendars(User user);
         public abstract void UpdateCalendar(Calendar calendar);
