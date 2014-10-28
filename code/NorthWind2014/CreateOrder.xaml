@@ -1,0 +1,11 @@
+﻿<Window x:Class="NorthWind.CreateOrder"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CreateOrder" Height="300" Width="300">
+    <Grid>
+        <Button Content="Create order" HorizontalAlignment="Center" Margin="64,0,62,10" Width="166" FontSize="18" Height="41" VerticalAlignment="Bottom"/>
+        <TextBox Height="23" Margin="10,41,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <Label Content="Address name" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+
+    </Grid>
+</Window>
