@@ -13,8 +13,8 @@ namespace CalendarAssignment.Controller
 {
     abstract class ControllerFacade : IControllerFacade
     {
+        public User LoggedInUser { get; private set; } // filled out by calling login (further down)
         public StorageContext StorageContext { get; set; }
-
         public abstract Calendar AddCalendar(string title, bool isPublic, User owner);
         public abstract Event AddEvent(Calendar calender, DateTime startDate, DateTime endDate, string title);
         public abstract User CreateUser(string username, string password);
