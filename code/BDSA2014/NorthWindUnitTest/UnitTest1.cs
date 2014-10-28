@@ -14,7 +14,7 @@ namespace NorthWindUnitTest
         [TestMethod]
         public void CreateAndGetOrderTest()
         {
-            using (var context = new NorthWindContext())
+            using (var context = new NorthWind.Model.NorthWindContext())
             {
                 var newestOrder = (from o in context.Orders
                                    orderby o.Id descending

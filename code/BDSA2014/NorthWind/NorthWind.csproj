@@ -78,9 +78,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Migrations\201410071306583_initial.cs" />
-    <Compile Include="Migrations\201410071306583_initial.Designer.cs">
-      <DependentUpon>201410071306583_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201410272328106_first.cs" />
+    <Compile Include="Migrations\201410272328106_first.Designer.cs">
+      <DependentUpon>201410272328106_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\CsvLoader.cs" />
@@ -107,11 +107,6 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Repository.cs" />
-    <Compile Include="NorthWindDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -125,25 +120,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\201410071306583_initial.resx">
-      <DependentUpon>201410071306583_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201410272328106_first.resx">
+      <DependentUpon>201410272328106_first.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="NorthWindDataSet.xsc">
-      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
+    <None Include="categories.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="NorthWindDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>NorthWindDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="NorthWindDataSet.xss">
-      <DependentUpon>NorthWindDataSet.xsd</DependentUpon>
+    <None Include="orders.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="products.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

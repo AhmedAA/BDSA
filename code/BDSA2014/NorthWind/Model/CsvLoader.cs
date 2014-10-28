@@ -18,11 +18,11 @@ namespace NorthWind.Model
 
         public static Category[] Categories { get; set; }
 
-        public static void LoadFromCsvIntoDb()
+        public static void LoadFromCsvIntoDb(string path = "")
         {
-            LoadProducts("products.csv");
-            LoadOrders("orders.csv");
-            LoadCategories("categories.csv");
+            LoadProducts(path + "products.csv");
+            LoadOrders(path + "orders.csv");
+            LoadCategories(path + "categories.csv");
 
             using (var repo = new NorthWindContext())
             {
