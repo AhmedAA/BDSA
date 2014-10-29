@@ -26,7 +26,7 @@ namespace NorthWind.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            Model.CsvLoader.LoadFromCsvIntoDb();
+            Model.CsvLoader.LoadFromCsvIntoDb(@"D:\Git\ITU\sem7\BDSA\Group\code\BDSA2014\NorthWind\bin\Debug\");
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Model
 {
-    public class NorthWindContext : DbContext
+    public class NorthWindContext : DbContext, IDisposable
     {
 
         static NorthWindContext()
