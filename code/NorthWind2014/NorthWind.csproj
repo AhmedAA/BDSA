@@ -77,6 +77,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CreateOrderWindow.xaml.cs">
+      <DependentUpon>CreateOrderWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Category.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
@@ -97,6 +100,7 @@
     <Compile Include="Model\Order.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\OrderDto.cs" />
     <Compile Include="Model\Order_Detail.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
@@ -116,6 +120,10 @@
     <Compile Include="Model\Territory.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
+    <Page Include="CreateOrderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -187,10 +195,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="northwind.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="northwind_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>northwind.mdf</DependentUpon>
     </Content>
   </ItemGroup>

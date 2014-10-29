@@ -2,22 +2,22 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Properties="clr-namespace:NorthWind.Properties" x:Class="NorthWind.MainWindow"
-        Title="NorthWind" Height="633" Width="767">
+        Title="NorthWind" Height="633" Width="767" WindowStartupLocation="CenterScreen" SizeToContent="Width">
     <Grid>
         <TabControl Margin="10,57,10,10">
             <TabItem Header="Products">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="ProductsDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Products}" ScrollViewer.CanContentScroll="False"/>
+                    <DataGrid x:Name="ProductsDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Products, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.CanContentScroll="False" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Categories">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="CategoriesDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Categories}" ScrollViewer.CanContentScroll="False"/>
+                    <DataGrid x:Name="CategoriesDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Categories, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.CanContentScroll="False" IsReadOnly="True"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Orders">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="OrdersDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Orders}" ScrollViewer.CanContentScroll="False"/>
+                    <DataGrid x:Name="OrdersDataGrid" Margin="10,10,10,0" VerticalAlignment="Top" Height="437" ItemsSource="{Binding Path=Orders, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" ScrollViewer.CanContentScroll="False" IsReadOnly="True"/>
                     <Button x:Name="ButtonCreateOrder" Content="Create order" HorizontalAlignment="Left" Margin="10,452,0,0" VerticalAlignment="Top" Width="114" Height="45" FontSize="18" Click="CreateOrderClicked"/>
                 </Grid>
             </TabItem>
