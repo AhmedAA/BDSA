@@ -4,13 +4,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using CalendarAssignment.Controller;
 using CalendarAssignment.Model;
 
 namespace CalendarAssignment.Storage.Online
 {
     abstract class AOnlineStorage : IStorage
     {
-        User _user = new User();
         public string Url { get; set; }
         public int Port { get; set; }
         /// <summary>

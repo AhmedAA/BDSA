@@ -29,8 +29,10 @@ namespace CalendarAssignment.Model.Event
          * context EventItem::EventItem post:
          *      isEventInCalendar()
          */
-        public EventItem(DateTime startDate, DateTime endDate, string title, string description = "")
+        public EventItem(Calendar calendar, DateTime startDate, DateTime endDate, string title, string description = "")
         {
+            // TODO: Assert data isn't null somehow?
+            calendar.Events.Add(this);
             StartDate = startDate;
             EndDate = endDate;
             Title = title;
@@ -52,8 +54,16 @@ namespace CalendarAssignment.Model.Event
          */
         public void ChangeDates(DateTime startDate, DateTime endDate)
         {
-            StartDate = startDate;
-            EndDate = endDate;
+            if ((this.StartDate != startDate) || (this.EndDate != endDate))
+            {
+                StartDate = startDate;
+                EndDate = endDate;
+            }
+            else
+            {
+                this.StartDate = StartDate;
+                this.EndDate = EndDate;
+            }
         }
 
         public void ChangeTitle(string title)
