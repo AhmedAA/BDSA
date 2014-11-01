@@ -9,12 +9,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using NorthWind.Model;
+using NorthWind.Reporting;
+using NorthWind.Reporting.DTOs;
+using NorthWind.Reporting.Errors;
+using MessageBox = System.Windows.MessageBox;
 
 namespace NorthWind
 {
@@ -24,17 +29,17 @@ namespace NorthWind
     public partial class MainWindow : Window
     {
 
-        internal IRepository _repo;
+        private IRepository _repo;
+        private IReporter _reporter;
 
         public MainWindow()
         {
             InitializeComponent();
             this.Closing += OnClosing;
             _repo = new Repository();
-            //_repo.PropertyChanged += PropertyChanged;
+            _reporter = new Reporter();
             _repo.NewOrderEvent += OnNewOrderEvent;
             this.DataContext = _repo;
-            //Task.Run(() => _repo.Orders);
         }
 
         private void OnNewOrderEvent(object sender, NewOrderEventArgs newOrderEventArgs)
@@ -66,6 +71,33 @@ namespace NorthWind
         private void OnClosing(Object sender, CancelEventArgs args)
         {
             // TODO Save database changes, when closing.
+        }
+
+        private void ButtonReportTopOrdersTotalPriceClicked(object sender, RoutedEventArgs e)
+        {
+            InputNumberWindow inputNumberWindow = new InputNumberWindow();
+            inputNumberWindow.OkClickedEvent += DisplayReportTopOrdersTotalPrice;
+            inputNumberWindow.SetText("Top orders by total price", "Number of orders to display");
+            inputNumberWindow.Show();
+        }
+
+        private void DisplayReportTopOrdersTotalPrice(Object sender, InputNumberWindow.NumberInputArgs e)
+        {
+            int displayCount = e.Input;
+            Report<IList<OrdersByTotalPriceDto>, ReportError> report = _reporter.TopOrdersByTotalPrice(displayCount);
+            // Display error message and return, if error occured.
+            if (report.Error != null)
+            {
+                var mes = report.Error.Message;
+                MessageBox.Show(this, "An error generating the report happened. See error message:\n" + mes,
+                    "Report error");
+                return;
+            }
+            
+            // If no error occured, display report.
+            ReportTopOrdersTotalPriceWindow reportWindow = new ReportTopOrdersTotalPriceWindow();
+            reportWindow.SetReportData(report.Data);
+            reportWindow.Show();
         }
     }
 }
