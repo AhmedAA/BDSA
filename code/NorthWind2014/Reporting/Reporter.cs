@@ -21,16 +21,16 @@ namespace NorthWind.Reporting
                 // TODO This report doesn't return the correct answer... It should return the top (highest) orders by total price.
                 context.Configuration.ProxyCreationEnabled = false;
                 IEnumerable<OrdersByTotalPriceDto> dtos = (from order in context.Orders
-                                                          join orderDetail in context.Order_Details on order.OrderID equals orderDetail.OrderID
-                                                          select new OrdersByTotalPriceDto()
-                                                          {
-                                                              OrderId = order.OrderID,
-                                                              OrderDate = order.OrderDate ?? DateTime.Today,
-                                                              CustomerContactName = order.ShipName,
-                                                              //TotalPriceWithDiscount = orderDetail.UnitPrice - Convert.ToDecimal(orderDetail.Discount),
-                                                              TotalPrice = orderDetail.UnitPrice
-                                                          }
-                                                          ).Take(count);
+                                                           join orderDetail in context.Order_Details on order.OrderID equals orderDetail.OrderID
+                                                           group orderDetail by orderDetail.OrderID into fullOrder
+                                                           select new OrdersByTotalPriceDto()
+                                                           {
+                                                               OrderId = fullOrder.FirstOrDefault().OrderID,
+                                                               OrderDate = fullOrder.FirstOrDefault().Order.OrderDate ?? DateTime.Today,
+                                                               CustomerContactName = fullOrder.FirstOrDefault().Order.ShipName,
+                                                               TotalPriceWithDiscount = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice) - fullOrder.Sum(t => t.Discount),
+                                                               TotalPrice = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice)
+                                                           }).Take(count).OrderByDescending(x => x.TotalPrice);
 
                 return new Report<IList<OrdersByTotalPriceDto>, ReportError>() {Data = dtos.ToList(), Error = null};
             }

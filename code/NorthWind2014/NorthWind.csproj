@@ -81,6 +81,7 @@
     <Compile Include="CreateOrderWindow.xaml.cs">
       <DependentUpon>CreateOrderWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="InputNumberWindow.xaml.cs">
       <DependentUpon>InputNumberWindow.xaml</DependentUpon>
     </Compile>
