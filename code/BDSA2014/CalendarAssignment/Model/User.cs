@@ -10,7 +10,7 @@ namespace CalendarAssignment.Model
     {
         public string Username { get; set; }
         public string HashedPassword { get; set; }
-        public bool IsLoggedIn { get; private set; }
+        public bool IsLoggedIn { get; set; }
 
         public void LogIn()
         {

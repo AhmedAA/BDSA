@@ -14,7 +14,7 @@ namespace CalendarAssignment.Controller
         void RemoveEvent(Event givenEvent);
         Collection<Calendar> GetCalendars();
         Collection<Event> GetEvents(Calendar calendar);
-        User LogIn(string username, string password);
+        void LogIn(string username, string password);
         void LogOut(User user);
         void ChangeTitle(Event givenEvent, string title);
         void ChangeDescription(Event givenEvent, string description);

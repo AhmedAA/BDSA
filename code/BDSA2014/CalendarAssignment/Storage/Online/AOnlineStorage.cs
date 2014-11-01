@@ -43,14 +43,15 @@ namespace CalendarAssignment.Storage.Online
 
         public void CreateCalendar(Calendar calendar)
         {
-            if (_user.IsLoggedIn)
+            User Owner = isUserLoggedIn();          
+            String title = calendar.Title;
+            bool isPublic = calendar.IsPublicCalendar;
+            calendar.Owner = Owner;
+            ControllerFacade.GetControllerFacade().AddCalendar(title, isPublic, Owner);
+            if (isCalendarAdded(calendar))
             {
-                ProtectedCreateCalendar();
-            }
-            else
-            {
-                throw new Exception("No user logged in");
-            }          
+                calendarIsOnUser(calendar);
+            }            
         }
 
         protected abstract void ProtectedCreateCalendar();
@@ -59,5 +60,32 @@ namespace CalendarAssignment.Storage.Online
         public abstract void UpdateCalendar(Calendar calendar);
         public abstract void DeleteCalendar(Calendar calendar);
         public abstract User ReadUsers();
+
+        private User isUserLoggedIn()
+        {
+            if (ControllerFacade.GetControllerFacade().LoggedInUser.IsLoggedIn)
+            {
+                ProtectedCreateCalendar();
+                return ControllerFacade.GetControllerFacade().LoggedInUser;
+            }
+            throw new Exception("No user logged in");          
+        }
+
+        private bool isCalendarAdded(Calendar calendar)
+        {
+            if (ControllerFacade.GetControllerFacade().GetCalendars().Contains(calendar))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private bool calendarIsOnUser(Calendar calendar)
+        {
+            if (calendar.Owner == ControllerFacade.GetControllerFacade().LoggedInUser)
+                return true;
+            return false;
+        }
+        
     }
 }

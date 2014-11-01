@@ -14,5 +14,6 @@ namespace CalendarAssignment.Model
         public bool IsPublicCalendar { get; set; }
         public bool IsSynced { get; set; }
         public List<EventItem> Events { get; set; }
+        public User Owner { get; set; }
     }
 }
