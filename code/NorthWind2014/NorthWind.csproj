@@ -125,12 +125,14 @@
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Reporting\DTOs\OrdersByTotalPriceDto.cs" />
+    <Compile Include="Reporting\DTOs\ProductsBySaleDto.cs" />
+    <Compile Include="Reporting\DTOs\UnitsSoldByMonthDto.cs" />
     <Compile Include="Reporting\Errors\ReportError.cs" />
     <Compile Include="Reporting\IReporter.cs" />
     <Compile Include="Reporting\Report.cs" />
     <Compile Include="Reporting\Reporter.cs" />
-    <Compile Include="ReportTopOrdersTotalPriceWindow.xaml.cs">
-      <DependentUpon>ReportTopOrdersTotalPriceWindow.xaml</DependentUpon>
+    <Compile Include="ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="CreateOrderWindow.xaml">
       <SubType>Designer</SubType>
@@ -152,7 +154,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ReportTopOrdersTotalPriceWindow.xaml">
+    <Page Include="ReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,6 +223,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>northwind.mdf</DependentUpon>
     </Content>
+    <Content Include="Queries\ReportProductBySaleQuery.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

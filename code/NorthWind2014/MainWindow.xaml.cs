@@ -95,8 +95,8 @@ namespace NorthWind
             }
             
             // If no error occured, display report.
-            ReportTopOrdersTotalPriceWindow reportWindow = new ReportTopOrdersTotalPriceWindow();
-            reportWindow.SetReportData(report.Data);
+            ReportWindow reportWindow = new ReportWindow();
+            reportWindow.SetReportData("TopOrdersByTotalPriceTemplate", new[] { new { Data = report.Data } });
             reportWindow.Show();
         }
     }

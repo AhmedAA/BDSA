@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,7 +20,6 @@ namespace NorthWind.Reporting
 
             using (var context = new northwindEntities())
             {
-                // TODO This report doesn't return the correct answer... It should return the top (highest) orders by total price.
                 context.Configuration.ProxyCreationEnabled = false;
                 IEnumerable<OrdersByTotalPriceDto> dtos = (from order in context.Orders
                                                            join orderDetail in context.Order_Details on order.OrderID equals orderDetail.OrderID
@@ -35,5 +36,16 @@ namespace NorthWind.Reporting
                 return new Report<IList<OrdersByTotalPriceDto>, ReportError>() {Data = dtos.ToList(), Error = null};
             }
         }
+
+        public Report<IList<ProductsBySaleDto>, ReportError> TopProductsBySale(int count)
+        {
+            using (var context = new northwindEntities())
+            {
+                context.Configuration.ProxyCreationEnabled = false;
+                IEnumerable<ProductsBySaleDto> dtos = (from p in context.Products
+                                                           join (from o in context.Orders
+                                                               join ))
+            }
+        } 
     }
 }

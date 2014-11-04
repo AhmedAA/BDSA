@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,19 @@ using NorthWind.Reporting.DTOs;
 namespace NorthWind
 {
     /// <summary>
-    /// Interaction logic for ReportTopOrdersTotalPriceWindow.xaml
+    /// Interaction logic for ReportWindow.xaml
     /// </summary>
-    public partial class ReportTopOrdersTotalPriceWindow : Window
+    public partial class ReportWindow : Window
     {
-        public ReportTopOrdersTotalPriceWindow()
+        public ReportWindow()
         {
             InitializeComponent();
         }
 
-        public void SetReportData(IList<OrdersByTotalPriceDto> data)
+        public void SetReportData(string reportTemplate, IEnumerable data)
         {
-            ReportDataGrid.ItemsSource = data;
+            ItemsControl.ItemTemplate = (DataTemplate)Resources[reportTemplate];
+            ItemsControl.ItemsSource = data;
         }
 
         private void CloseClicked(object sender, RoutedEventArgs e)
