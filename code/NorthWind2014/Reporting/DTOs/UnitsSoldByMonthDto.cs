@@ -10,6 +10,10 @@ namespace NorthWind.Reporting.DTOs
     {
         public int UnitsSoldYear { get; set; }
         public int UnitsSold { get; set; }
+        public int Avg
+        {
+            get { return UnitsSoldYear/UnitsSold; }
+        }
         public int Month { get; set; }
         public int Year { get; set; }
     }

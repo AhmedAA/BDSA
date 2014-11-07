@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity.Core;
+using System.Data.Odbc;
 using System.Linq;
+using System.Net.Sockets;
 using System.Runtime.Remoting.Contexts;
 using System.Security.Cryptography;
 using System.Text;
@@ -31,9 +34,9 @@ namespace NorthWind.Reporting
                                                                CustomerContactName = fullOrder.FirstOrDefault().Order.ShipName,
                                                                TotalPriceWithDiscount = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice) - fullOrder.Sum(t => t.Discount),
                                                                TotalPrice = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice)
-                                                           }).Take(count).OrderByDescending(x => x.TotalPrice);
+                                                           }).OrderByDescending(x => x.TotalPrice).Take(count);
 
-                return new Report<IList<OrdersByTotalPriceDto>, ReportError>() {Data = dtos.ToList(), Error = null};
+                return new Report<IList<OrdersByTotalPriceDto>, ReportError>() { Data = dtos.ToList(), Error = null };
             }
         }
 
@@ -42,10 +45,31 @@ namespace NorthWind.Reporting
             using (var context = new northwindEntities())
             {
                 context.Configuration.ProxyCreationEnabled = false;
+
+                var ordersAndDetails = from o in context.Orders
+                                       join od in context.Order_Details on o.OrderID equals od.OrderID into orderOrderDetail
+                                       from ood in orderOrderDetail
+                                       select new
+                                       {
+                                           ood.OrderID,
+                                           ood.Quantity,
+                                           ood.ProductID
+                                       };
+
                 IEnumerable<ProductsBySaleDto> dtos = (from p in context.Products
-                                                           join (from o in context.Orders
-                                                               join ))
+                                                       join ood in ordersAndDetails on p.ProductID equals ood.ProductID
+                                                       orderby ood.Quantity
+                                                       select new ProductsBySaleDto()
+                                                       {
+                                                           ProductId = p.ProductID,
+                                                           ProductName = p.ProductName,
+                                                       }).Take(count);
+                foreach (ProductsBySaleDto pbsd in dtos)
+                {
+                    // TODO Select the UnitsSoldByMonth for this productsBySaleDTO and add it to it.
+
+                }
             }
-        } 
+        }
     }
 }
