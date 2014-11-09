@@ -26,8 +26,9 @@ namespace NorthWind
             InitializeComponent();
         }
 
-        public void SetReportData(string reportTemplate, IEnumerable data)
+        public void SetReportData(string reportTitle, string reportTemplate, IEnumerable data)
         {
+            LabelReportTitle.Content = reportTitle;
             ItemsControl.ItemTemplate = (DataTemplate)Resources[reportTemplate];
             ItemsControl.ItemsSource = data;
         }

@@ -10,6 +10,6 @@ namespace NorthWind.Reporting.DTOs
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public IEnumerable<UnitsSoldByMonthDto> UnitsSoldByMonth { get; set; }
+        public IList<UnitsSoldByMonthDto> UnitsSoldByMonth { get; set; }
     }
 }

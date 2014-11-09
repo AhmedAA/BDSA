@@ -124,6 +124,9 @@
     <Compile Include="Model\Territory.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PageTest.xaml.cs">
+      <DependentUpon>PageTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\DTOs\OrdersByTotalPriceDto.cs" />
     <Compile Include="Reporting\DTOs\ProductsBySaleDto.cs" />
     <Compile Include="Reporting\DTOs\UnitsSoldByMonthDto.cs" />
@@ -154,6 +157,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PageTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ReportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -224,7 +231,6 @@
       <DependentUpon>northwind.mdf</DependentUpon>
     </Content>
     <Content Include="Queries\ReportProductBySaleQuery.sql" />
-    <Content Include="ReportProductBySaleQuery.sql" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

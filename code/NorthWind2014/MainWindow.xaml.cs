@@ -96,8 +96,40 @@ namespace NorthWind
             
             // If no error occured, display report.
             ReportWindow reportWindow = new ReportWindow();
-            reportWindow.SetReportData("TopOrdersByTotalPriceTemplate", new[] { new { Data = report.Data } });
+            reportWindow.SetReportData("Top orders by total price", "TopOrdersByTotalPriceTemplate", new[] { new { Data = report.Data } });
             reportWindow.Show();
+        }
+
+        private void DisplayReportTopProductsBySale(Object sender, InputNumberWindow.NumberInputArgs e)
+        {
+            int displayCount = e.Input;
+            Report<IList<ProductsBySaleDto>, ReportError> report = _reporter.TopProductsBySale(displayCount);
+            // Display error message and return, if error occured.
+            if (report.Error != null)
+            {
+                var mes = report.Error.Message;
+                MessageBox.Show(this, "An error generating the report happened. See error message:\n" + mes,
+                    "Report error");
+                return;
+            }
+
+            // If no error occured, display report.
+            ReportWindow reportWindow = new ReportWindow();
+            var list = new List<dynamic>();
+            foreach (var dtos in report.Data)
+            {
+                list.Add(new {ProductName = dtos.ProductName, ProductId = dtos.ProductId, Data = dtos.UnitsSoldByMonth});
+            }
+            reportWindow.SetReportData("Top products by sale", "TopProductsBySaleTemplate", list);
+            reportWindow.Show();
+        }
+
+        private void ButtonReportTopProductsBySale(object sender, RoutedEventArgs e)
+        {
+            InputNumberWindow inputNumberWindow = new InputNumberWindow();
+            inputNumberWindow.OkClickedEvent += DisplayReportTopProductsBySale;
+            inputNumberWindow.SetText("Top products by sale", "Number of products to display");
+            inputNumberWindow.Show();
         }
     }
 }
