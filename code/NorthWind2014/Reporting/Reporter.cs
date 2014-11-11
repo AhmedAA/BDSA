@@ -45,46 +45,35 @@ namespace NorthWind.Reporting
             // TODO The UnitsSoldByMonth is returned as null...
             using (var context = new northwindEntities())
             {
-                context.Configuration.ProxyCreationEnabled = false;
+                IList<ProductsBySaleDto> dtos = (from od in context.Order_Details
+                    group od by od.ProductID
+                    into OrderDetailsProducts
+                    select new ProductsBySaleDto()
+                    {
+                        ProductId = OrderDetailsProducts.FirstOrDefault().ProductID,
+                        ProductName = OrderDetailsProducts.FirstOrDefault().Product.ProductName,
+                        UnitsSoldByMonth = (
+                            from t in OrderDetailsProducts
+                            let orderDate = t.Order.OrderDate
+                            where orderDate != null
+                            group t by new
+                            {
+                                orderDate.Value.Month,
+                                orderDate.Value.Year
+                            } into timing
+                            select new UnitsSoldByMonthDto()
+                            {
+                                UnitsSold = timing.Sum(x => x.Quantity),
+                                Count = timing.Count(),
+                                Month = timing.Key.Month,
+                                Year = timing.Key.Year
+                            }).ToList()
+                    }).ToList();
 
-                var ordersAndDetails = from o in context.Orders
-                                       join od in context.Order_Details on o.OrderID equals od.OrderID into orderOrderDetail
-                                       from ood in orderOrderDetail
-                                       select new
-                                       {
-                                           ood.OrderID,
-                                           ood.Quantity,
-                                           ood.ProductID
-                                       };
-
-                IEnumerable<ProductsBySaleDto> dtos = (from p in context.Products
-                                                       join ood in ordersAndDetails on p.ProductID equals ood.ProductID
-                                                       orderby ood.Quantity
-                                                       select new ProductsBySaleDto()
-                                                       {
-                                                           ProductId = p.ProductID,
-                                                           ProductName = p.ProductName,
-                                                       }).Take(count);
-
-                foreach (ProductsBySaleDto pbsd in dtos)
-                {
-                    ProductsBySaleDto prdBSl = pbsd;
-                    IEnumerable<UnitsSoldByMonthDto> dtos2 = (from od in context.Order_Details
-                                    where od.ProductID == prdBSl.ProductId
-                                    group od by od.Order.OrderDate.Value.Month into unitsSoldByMonth
-                                    select new UnitsSoldByMonthDto()
-                                    {
-                                        UnitsSold = unitsSoldByMonth.FirstOrDefault().Quantity,
-                                        UnitsSoldYear = (from od2 in context.Order_Details
-                                                        where od2.ProductID == unitsSoldByMonth.FirstOrDefault().ProductID
-                                                        group od2 by od2.Order.OrderDate.Value.Year into unitsSoldByYear
-                                                        select unitsSoldByYear.FirstOrDefault().Quantity).FirstOrDefault(),
-                                        Month = unitsSoldByMonth.Key,
-                                        Year = unitsSoldByMonth.FirstOrDefault().Order.OrderDate.Value.Year
-                                    }).OrderByDescending(x => x.UnitsSoldYear).Take(3);
-                    pbsd.UnitsSoldByMonth = dtos2.ToList();
-                }
-                return new Report<IList<ProductsBySaleDto>, ReportError>() {Data = dtos.ToList(), Error = null};
+                IList<ProductsBySaleDto> dtosSorted = (from pd in dtos
+                    orderby pd.UnitsSoldByMonth.Sum(x => x.UnitsSold) descending
+                    select pd).Take(count).ToList();
+                return new Report<IList<ProductsBySaleDto>, ReportError>() { Data = dtosSorted, Error = null };
             }
         }
     }

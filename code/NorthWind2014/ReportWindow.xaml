@@ -6,7 +6,7 @@
             <DataGrid x:Name="ReportDataGrid" ScrollViewer.CanContentScroll="True" IsReadOnly="True" Margin="0,0,0,0" ItemsSource="{Binding Path=Data}"/>
         </DataTemplate>
         <DataTemplate x:Key="TopProductsBySaleTemplate">
-            <StackPanel HorizontalAlignment="Left" Height="209" VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Top">
                 <Label Content="{Binding Path=ProductName}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="{Binding Path=ProductId}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <DataGrid ScrollViewer.CanContentScroll="True" IsReadOnly="True" ItemsSource="{Binding Path=Data}"/>
