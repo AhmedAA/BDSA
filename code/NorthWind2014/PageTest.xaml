@@ -8,6 +8,20 @@
 	Title="PageTest">
 
     <Grid>
-        
+        <Label Content="Phillip Phoelich" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="Reports to id:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
+        <Label Content="21" HorizontalAlignment="Left" Margin="96,49,0,0" VerticalAlignment="Top"/>
+        <StackPanel Margin="10,80,10,10">
+            <Grid Height="200">
+                <Label Content="Order:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="14" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                <Label Content="Order date:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
+                <Label Content="1992-02-26" HorizontalAlignment="Left" Margin="85,46,0,0" VerticalAlignment="Top"/>
+                <Label Content="Total price:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                <Label Content="200" HorizontalAlignment="Left" Margin="85,72,0,0" VerticalAlignment="Top"/>
+                <DataGrid Margin="10,103,10,10"/>
+            </Grid>
+        </StackPanel>
+
     </Grid>
 </Page>

@@ -25,7 +25,8 @@
                 <Grid Background="#FFE5E5E5">
                     <StackPanel Margin="10">
                         <Button x:Name="ButtonReportTopOrdersTotalPrice" Content="Top orders by total price" Margin="0,0,0,10" Height="50" FontSize="18" Click="ButtonReportTopOrdersTotalPriceClicked" />
-                        <Button x:Name="ButtonReportTopProductBySale" Content="Top product by sale" Margin="0,0,0,10" Height="50" FontSize="18" Click="ButtonReportTopProductsBySale" />
+                        <Button x:Name="ButtonReportTopProductsBySale" Content="Top product by sale" Margin="0,0,0,10" Height="50" FontSize="18" Click="ButtonReportTopProductsBySaleClicked" />
+                        <Button x:Name="ButtonReportEmployeeSale" Content="Employee sales" Margin="0,0,0,10" Height="50" FontSize="18" Click="ButtonReportEmployeeSaleClicked" />
                     </StackPanel>
                 </Grid>
             </TabItem>

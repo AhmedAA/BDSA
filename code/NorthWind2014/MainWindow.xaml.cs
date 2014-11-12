@@ -1,20 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using NorthWind.Model;
 using NorthWind.Reporting;
 using NorthWind.Reporting.DTOs;
@@ -81,7 +68,7 @@ namespace NorthWind
             inputNumberWindow.Show();
         }
 
-        private void DisplayReportTopOrdersTotalPrice(Object sender, InputNumberWindow.NumberInputArgs e)
+        private void DisplayReportTopOrdersTotalPrice(object sender, InputNumberWindow.NumberInputArgs e)
         {
             int displayCount = e.Input;
             Report<IList<OrdersByTotalPriceDto>, ReportError> report = _reporter.TopOrdersByTotalPrice(displayCount);
@@ -100,7 +87,7 @@ namespace NorthWind
             reportWindow.Show();
         }
 
-        private void DisplayReportTopProductsBySale(Object sender, InputNumberWindow.NumberInputArgs e)
+        private void DisplayReportTopProductsBySale(object sender, InputNumberWindow.NumberInputArgs e)
         {
             int displayCount = e.Input;
             Report<IList<ProductsBySaleDto>, ReportError> report = _reporter.TopProductsBySale(displayCount);
@@ -124,11 +111,36 @@ namespace NorthWind
             reportWindow.Show();
         }
 
-        private void ButtonReportTopProductsBySale(object sender, RoutedEventArgs e)
+        private void DisplayReportEmployeeSale(object sender, InputNumberWindow.NumberInputArgs e)
+        {
+            int employeeId = e.Input;
+            Report<EmployeeSaleDto, ReportError> report = _reporter.EmployeeSale(employeeId);
+            // Display error message and return, if error occured.
+            if (report.Error != null)
+            {
+                var mes = report.Error.Message;
+                MessageBox.Show(this, "An error generating the report happened. See error message:\n" + mes,
+                    "Report error");
+                return;
+            }
+            ReportWindow reportWindow = new ReportWindow();
+            reportWindow.SetReportData("Employee sales", "EmployeeSaleTemplate", new [] { report.Data });
+            reportWindow.Show();
+        }
+
+        private void ButtonReportTopProductsBySaleClicked(object sender, RoutedEventArgs e)
         {
             InputNumberWindow inputNumberWindow = new InputNumberWindow();
             inputNumberWindow.OkClickedEvent += DisplayReportTopProductsBySale;
             inputNumberWindow.SetText("Top products by sale", "Number of products to display");
+            inputNumberWindow.Show();
+        }
+
+        private void ButtonReportEmployeeSaleClicked(object sender, RoutedEventArgs e)
+        {
+            InputNumberWindow inputNumberWindow = new InputNumberWindow();
+            inputNumberWindow.OkClickedEvent += DisplayReportEmployeeSale;
+            inputNumberWindow.SetText("Employee sales", "Id of the employee");
             inputNumberWindow.Show();
         }
     }

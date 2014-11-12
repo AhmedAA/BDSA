@@ -36,56 +36,102 @@ namespace NorthWind.Reporting
                                                                TotalPrice = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice)
                                                            }).OrderByDescending(x => x.TotalPrice).Take(count);
 
+                if (dtos.Count() == 0)
+                {
+                    return new Report<IList<OrdersByTotalPriceDto>, ReportError>() {Data = null, Error = new ReportError() {Message = "No orders found"}};
+                }
+
                 return new Report<IList<OrdersByTotalPriceDto>, ReportError>() { Data = dtos.ToList(), Error = null };
             }
         }
 
         public Report<IList<ProductsBySaleDto>, ReportError> TopProductsBySale(int count)
         {
-            // TODO The UnitsSoldByMonth is returned as null...
             using (var context = new northwindEntities())
             {
-                context.Configuration.ProxyCreationEnabled = false;
+                IList<ProductsBySaleDto> dtos = (from od in context.Order_Details
+                    group od by od.ProductID
+                    into orderDetailsProducts
+                    select new ProductsBySaleDto()
+                    {
+                        ProductId = orderDetailsProducts.FirstOrDefault().ProductID,
+                        ProductName = orderDetailsProducts.FirstOrDefault().Product.ProductName,
+                        UnitsSoldByMonth = (
+                            from t in orderDetailsProducts
+                            let orderDate = t.Order.OrderDate
+                            where orderDate != null
+                            group t by new
+                            {
+                                orderDate.Value.Month,
+                                orderDate.Value.Year
+                            } into timing
+                            select new UnitsSoldByMonthDto()
+                            {
+                                UnitsSold = timing.Sum(x => x.Quantity),
+                                Count = timing.Count(),
+                                Month = timing.Key.Month,
+                                Year = timing.Key.Year
+                            }).ToList()
+                    }).ToList();
 
-                var ordersAndDetails = from o in context.Orders
-                                       join od in context.Order_Details on o.OrderID equals od.OrderID into orderOrderDetail
-                                       from ood in orderOrderDetail
-                                       select new
-                                       {
-                                           ood.OrderID,
-                                           ood.Quantity,
-                                           ood.ProductID
-                                       };
-
-                IEnumerable<ProductsBySaleDto> dtos = (from p in context.Products
-                                                       join ood in ordersAndDetails on p.ProductID equals ood.ProductID
-                                                       orderby ood.Quantity
-                                                       select new ProductsBySaleDto()
-                                                       {
-                                                           ProductId = p.ProductID,
-                                                           ProductName = p.ProductName,
-                                                       }).Take(count);
-
-                foreach (ProductsBySaleDto pbsd in dtos)
+                if (dtos.Count == 0)
                 {
-                    ProductsBySaleDto prdBSl = pbsd;
-                    IEnumerable<UnitsSoldByMonthDto> dtos2 = (from od in context.Order_Details
-                                    where od.ProductID == prdBSl.ProductId
-                                    group od by od.Order.OrderDate.Value.Month into unitsSoldByMonth
-                                    select new UnitsSoldByMonthDto()
-                                    {
-                                        UnitsSold = unitsSoldByMonth.FirstOrDefault().Quantity,
-                                        UnitsSoldYear = (from od2 in context.Order_Details
-                                                        where od2.ProductID == unitsSoldByMonth.FirstOrDefault().ProductID
-                                                        group od2 by od2.Order.OrderDate.Value.Year into unitsSoldByYear
-                                                        select unitsSoldByYear.FirstOrDefault().Quantity).FirstOrDefault(),
-                                        Month = unitsSoldByMonth.Key,
-                                        Year = unitsSoldByMonth.FirstOrDefault().Order.OrderDate.Value.Year
-                                    }).OrderByDescending(x => x.UnitsSoldYear).Take(3);
-                    pbsd.UnitsSoldByMonth = dtos2.ToList();
-                }
-                return new Report<IList<ProductsBySaleDto>, ReportError>() {Data = dtos.ToList(), Error = null};
+                    return new Report<IList<ProductsBySaleDto>, ReportError>() {Data = null, Error = new ReportError() {Message = "No products found"}};
+                } 
+
+                IList<ProductsBySaleDto> dtosSorted = (from pd in dtos
+                    orderby pd.UnitsSoldByMonth.Sum(x => x.UnitsSold) descending
+                    select pd).Take(count).ToList();
+
+                return new Report<IList<ProductsBySaleDto>, ReportError>() { Data = dtosSorted, Error = null };
             }
         }
+
+        public Report<EmployeeSaleDto, ReportError> EmployeeSale(int id)
+        {
+            using (var context = new northwindEntities())
+            {
+                 EmployeeSaleDto dto = (from od in context.Order_Details
+                    where od.Order.EmployeeID == id
+                    select new EmployeeSaleDto()
+                    {
+                        EmployeeName = od.Order.Employee.FirstName + " " + od.Order.Employee.LastName,
+                        ReportsTo = od.Order.Employee.ReportsTo ?? default(int),
+                        Orders = (from o in context.Orders
+                            where o.EmployeeID == id
+                            select new ReportOrderDto()
+                            {
+                                OrderId = o.OrderID,
+                                OrderDate = o.OrderDate ?? default(DateTime),
+                                TotalPrice = (from od2 in context.Order_Details
+                                    where od2.OrderID == o.OrderID
+                                    select new
+                                    {
+                                        TotalPrice = od2.Quantity*od2.UnitPrice - od2.Discount
+                                    }).Sum(x => x.TotalPrice),
+                                Products = (from od3 in context.Order_Details
+                                    where od3.OrderID == o.OrderID
+                                    group od3 by od3.ProductID
+                                    into products
+                                    from p in products
+                                    select new ReportProductDto()
+                                    {
+                                        ProductName = p.Product.ProductName,
+                                        Quantity = p.Quantity,
+                                        UnitPrice = p.Product.UnitPrice ?? default(decimal)
+                                    }).ToList()
+                            }).ToList()
+                    }).FirstOrDefault();
+
+                // If no employee found, return error.
+                if (dto == null)
+                {
+                    return new Report<EmployeeSaleDto, ReportError>() {Data = null, Error = new ReportError() {Message = "No employee found with id " + id}};
+                }
+
+                // If employee found, return it.
+                return new Report<EmployeeSaleDto, ReportError>() {Data = dto, Error = null};
+            }
+        } 
     }
 }
