@@ -93,7 +93,7 @@ namespace CalendarAssignment.Model.Event
 
             return false;
         }
-
+        
         private void isEventInCalendar(EventItem eventt, Calendar calendar)
         {
             foreach (EventItem eventtt in calendar.Events)

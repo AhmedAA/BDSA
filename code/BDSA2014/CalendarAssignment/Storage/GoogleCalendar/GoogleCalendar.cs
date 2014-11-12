@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CalendarAssignment.Commands;
+using System.Diagnostics.Contracts;
+using CalendarAssignment.Controller;
 
 namespace CalendarAssignment.Storage.GoogleCalendar
 {
-    /**
-     * Invariants:
-     * @invariant: There is only one user at a given time
-     */
+
     class GoogleCalendar
     {
         public string ApiUri { get; set; }
@@ -59,6 +58,19 @@ namespace CalendarAssignment.Storage.GoogleCalendar
         public string UpdateEvent(string calendarId, string eventId, DateTime start, DateTime end, string method, int minutesReminder, string title, string description)
         {
             throw new NotImplementedException();
+        }
+
+        [ContractInvariantMethod]
+        protected void GoogleCalendarInvariant()
+        {
+            Contract.Invariant(ControllerFacade.GetControllerFacade().LoggedInUser.IsLoggedIn == true)
+            /**
+           * Invariants:
+           * @invariant: There is only one user logged in at a given time
+           * context GoogleCalendar inv:
+           * 'LoggedInUser == true'
+           */
+            throw new Exception(Contract.ContractFailed.Message());
         }
     }
 }
