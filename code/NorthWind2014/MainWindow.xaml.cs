@@ -24,7 +24,7 @@ namespace NorthWind
             InitializeComponent();
             this.Closing += OnClosing;
             _repo = new Repository();
-            _reporter = new Reporter();
+            _reporter = new Reporter(new NorthWindContextFactory());
             _repo.NewOrderEvent += OnNewOrderEvent;
             this.DataContext = _repo;
         }

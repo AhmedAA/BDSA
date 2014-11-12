@@ -13,15 +13,24 @@ using System.Threading.Tasks;
 using NorthWind.Model;
 using NorthWind.Reporting.DTOs;
 using NorthWind.Reporting.Errors;
+using Context = NorthWind.Model.Context;
 
 namespace NorthWind.Reporting
 {
     class Reporter : IReporter
     {
+        private IContextFactory _contextFactory;
+        private IContextHolder _contextHolder;
+
+        public Reporter(IContextFactory contextFactory)
+        {
+            _contextFactory = contextFactory;
+        }
+
         public Report<IList<OrdersByTotalPriceDto>, ReportError> TopOrdersByTotalPrice(int count)
         {
 
-            using (var context = new northwindEntities())
+            using (var context = _contextFactory.CreateContext())
             {
                 context.Configuration.ProxyCreationEnabled = false;
                 IEnumerable<OrdersByTotalPriceDto> dtos = (from order in context.Orders
@@ -47,7 +56,7 @@ namespace NorthWind.Reporting
 
         public Report<IList<ProductsBySaleDto>, ReportError> TopProductsBySale(int count)
         {
-            using (var context = new northwindEntities())
+            using (var context = _contextFactory.CreateContext())
             {
                 IList<ProductsBySaleDto> dtos = (from od in context.Order_Details
                     group od by od.ProductID
@@ -89,7 +98,7 @@ namespace NorthWind.Reporting
 
         public Report<EmployeeSaleDto, ReportError> EmployeeSale(int id)
         {
-            using (var context = new northwindEntities())
+            using (var context = _contextFactory.CreateContext())
             {
                  EmployeeSaleDto dto = (from od in context.Order_Details
                     where od.Order.EmployeeID == id
