@@ -1,6 +1,7 @@
 ﻿<Window x:Class="NorthWind.ReportWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="454" Width="619" WindowStartupLocation="CenterScreen" SizeToContent="Width" Title="Report">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="454" Width="619" WindowStartupLocation="CenterScreen" SizeToContent="Width" Title="Report"
+        xmlns:local-reporting-dto="clr-namespace:NorthWind.Reporting.DTOs">
     <Window.Resources>
         <DataTemplate x:Key="TopOrdersByTotalPriceTemplate">
             <DataGrid x:Name="ReportDataGrid" ScrollViewer.CanContentScroll="True" IsReadOnly="True" Margin="0,0,0,0" ItemsSource="{Binding Path=Data}"/>
@@ -12,10 +13,34 @@
                 <DataGrid ScrollViewer.CanContentScroll="True" IsReadOnly="True" ItemsSource="{Binding Path=Data}"/>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate x:Key="EmployeeSaleTemplate">
+            <Grid>
+                <Label Content="{Binding Path=EmployeeName}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+                <Label Content="Reports to id:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
+                <Label Content="{Binding Path=ReportsTo}" HorizontalAlignment="Left" Margin="96,49,0,0" VerticalAlignment="Top"/>
+                <ListBox Margin="10,80,10,10" DataContext="{Binding Path=Orders}" MinHeight="150">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type local-reporting-dto:ReportOrderDto}">
+                            <Grid DataContext="{Binding}" MinHeight="150">
+                                <Label Content="Order:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                                <Label Content="{Binding Path=OrderId}" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" FontSize="16"/>
+                                <Label Content="Order date:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
+                                <Label Content="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="85,46,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Total price:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+                                <Label Content="{Binding Path=TotalPrice}" HorizontalAlignment="Left" Margin="85,72,0,0" VerticalAlignment="Top"/>
+                                <DataGrid ScrollViewer.CanContentScroll="True" IsReadOnly="True" ItemsSource="{Binding Path=Products}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Grid>
         <Label x:Name="LabelReportTitle" Content="Top orders by total price" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <ScrollViewer Margin="10,57,10,69" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"><ItemsControl x:Name="ItemsControl"/></ScrollViewer>
+        <ScrollViewer Margin="10,57,10,69" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="ItemsControl"/>
+        </ScrollViewer>
         <Button x:Name="ButtonClose" Content="Close" Margin="10,0,10,10" FontSize="18" Click="CloseClicked" Height="54" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

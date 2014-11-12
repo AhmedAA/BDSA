@@ -127,7 +127,10 @@
     <Compile Include="PageTest.xaml.cs">
       <DependentUpon>PageTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reporting\DTOs\EmployeeSaleDto.cs" />
+    <Compile Include="Reporting\DTOs\ReportOrderDto.cs" />
     <Compile Include="Reporting\DTOs\OrdersByTotalPriceDto.cs" />
+    <Compile Include="Reporting\DTOs\ReportProductDto.cs" />
     <Compile Include="Reporting\DTOs\ProductsBySaleDto.cs" />
     <Compile Include="Reporting\DTOs\UnitsSoldByMonthDto.cs" />
     <Compile Include="Reporting\Errors\ReportError.cs" />
