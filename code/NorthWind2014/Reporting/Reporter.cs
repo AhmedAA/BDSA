@@ -36,7 +36,7 @@ namespace NorthWind.Reporting
                                                                TotalPrice = fullOrder.Sum(t => t.Quantity) * fullOrder.Sum(u => u.UnitPrice)
                                                            }).OrderByDescending(x => x.TotalPrice).Take(count);
 
-                if (dtos.Count() == 0)
+                if (!dtos.Any())
                 {
                     return new Report<IList<OrdersByTotalPriceDto>, ReportError>() {Data = null, Error = new ReportError() {Message = "No orders found"}};
                 }

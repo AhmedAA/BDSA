@@ -18,18 +18,20 @@
                 <Label Content="{Binding Path=EmployeeName}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
                 <Label Content="Reports to id:" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
                 <Label Content="{Binding Path=ReportsTo}" HorizontalAlignment="Left" Margin="96,49,0,0" VerticalAlignment="Top"/>
-                <ListBox Margin="10,80,10,10" DataContext="{Binding Path=Orders}" MinHeight="150">
+                <ListBox Margin="10,80,10,10" ItemsSource="{Binding Path=Orders}" MinHeight="150">
+                    <ListBox.Template>
+                        <ControlTemplate>
+                            <ItemsPresenter/>
+                        </ControlTemplate>
+                    </ListBox.Template>
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type local-reporting-dto:ReportOrderDto}">
-                            <Grid DataContext="{Binding}" MinHeight="150">
-                                <Label Content="Order:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-                                <Label Content="{Binding Path=OrderId}" HorizontalAlignment="Left" Margin="66,10,0,0" VerticalAlignment="Top" FontSize="16"/>
-                                <Label Content="Order date:" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top"/>
-                                <Label Content="{Binding Path=OrderDate}" HorizontalAlignment="Left" Margin="85,46,0,0" VerticalAlignment="Top"/>
-                                <Label Content="Total price:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-                                <Label Content="{Binding Path=TotalPrice}" HorizontalAlignment="Left" Margin="85,72,0,0" VerticalAlignment="Top"/>
+                            <StackPanel ScrollViewer.VerticalScrollBarVisibility="Disabled" CanVerticallyScroll="True" ScrollViewer.CanContentScroll="False">
+                                <Label ContentStringFormat="Order: {0}" Content="{Binding Path=OrderId}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16"/>
+                                <Label ContentStringFormat="Order date: {0}"  Content="{Binding Path=OrderDate}" HorizontalAlignment="Left"/>
+                                <Label ContentStringFormat="Total price: {0}" Content="{Binding Path=TotalPrice}" HorizontalAlignment="Left"/>
                                 <DataGrid ScrollViewer.CanContentScroll="True" IsReadOnly="True" ItemsSource="{Binding Path=Products}"/>
-                            </Grid>
+                            </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
