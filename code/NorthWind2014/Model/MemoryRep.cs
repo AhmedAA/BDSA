@@ -104,7 +104,23 @@ namespace NorthWind.Model
 
         public void CreateOrder(string name, string address, string city, string region, string postalCode, string country)
         {
-            _orders.Add(new Order() {ShipName = name, ShipAddress = address, ShipCity = city, ShipRegion = region, ShipPostalCode = postalCode, ShipCountry = country});
+            var newestOrder = (from o in Orders
+                               orderby o.OrderID descending
+                               select o).First();
+
+            var newOrder = new Order()
+            {
+                OrderID = newestOrder.OrderID + 1,
+                ShipName = name,
+                ShipAddress = address,
+                ShipCity = city,
+                ShipRegion = region,
+                ShipPostalCode = postalCode,
+                ShipCountry = country,
+                OrderDate = DateTime.Today
+            };
+            _orders.Add(newOrder);
+            NewOrderEvent(this, new NewOrderEventArgs() { OrderId = newOrder.OrderID, OrderDate = newOrder.OrderDate ?? DateTime.Today });
         }
     }
 }

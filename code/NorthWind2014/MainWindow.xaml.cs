@@ -22,7 +22,6 @@ namespace NorthWind
         public MainWindow()
         {
             InitializeComponent();
-            this.Closing += OnClosing;
             _repo = new MemoryRep();
             _reporter = new Reporter(new MemoryRep());
             _repo.NewOrderEvent += OnNewOrderEvent;
@@ -53,11 +52,6 @@ namespace NorthWind
         {
             OrderDto dto = args.OrderInput;
             _repo.CreateOrder(dto.ShipName, dto.ShipAddress, dto.ShipCity, dto.ShipRegion, dto.ShipPostalCode, dto.ShipCountry);
-        }
-
-        private void OnClosing(Object sender, CancelEventArgs args)
-        {
-            // TODO Save database changes, when closing.
         }
 
         private void ButtonReportTopOrdersTotalPriceClicked(object sender, RoutedEventArgs e)
