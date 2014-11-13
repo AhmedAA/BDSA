@@ -96,10 +96,7 @@
     <Compile Include="Model\Employee.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Context.cs" />
-    <Compile Include="Model\IContextFactory.cs" />
-    <Compile Include="Model\NorthWindContext.cs" />
-    <Compile Include="Model\NorthWindContextFactory.cs" />
+    <Compile Include="Model\MemoryRep.cs" />
     <Compile Include="Model\NorthWindModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,7 +115,7 @@
     <Compile Include="Model\Region.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Repository.cs" />
+    <Compile Include="Model\DbRep.cs" />
     <Compile Include="Model\Shipper.cs">
       <DependentUpon>NorthWindModel.tt</DependentUpon>
     </Compile>

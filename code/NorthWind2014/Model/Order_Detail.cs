@@ -9,9 +9,6 @@
 
 namespace NorthWind.Model
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Order_Detail
     {
         public int OrderID { get; set; }

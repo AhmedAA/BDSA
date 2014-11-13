@@ -23,8 +23,8 @@ namespace NorthWind
         {
             InitializeComponent();
             this.Closing += OnClosing;
-            _repo = new Repository();
-            _reporter = new Reporter(new NorthWindContextFactory());
+            _repo = new MemoryRep();
+            _reporter = new Reporter(new MemoryRep());
             _repo.NewOrderEvent += OnNewOrderEvent;
             this.DataContext = _repo;
         }

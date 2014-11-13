@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Data.Entity;
 
 namespace NorthWind.Model
 {
-    class Repository : IRepository
+    class DbRep : IRepository
     {
         public event EventHandler<NewOrderEventArgs> NewOrderEvent;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,6 +49,38 @@ namespace NorthWind.Model
                     }
                 }
                 return _ordersCache;
+            }
+        }
+
+        public ICollection<Order_Detail> OrderDetails
+        {
+            get
+            {
+                using (var context = new northwindEntities())
+                {
+                    context.Configuration.ProxyCreationEnabled = false;
+                    IEnumerable<Order_Detail> all = from p in context.Order_Details
+                                             select p;
+
+                    return new ObservableCollection<Order_Detail>(all);
+
+                }
+            }
+        }
+
+        public ICollection<Employee> Employees
+        {
+            get
+            {
+                using (var context = new northwindEntities())
+                {
+                    context.Configuration.ProxyCreationEnabled = false;
+                    IEnumerable<Employee> all = from p in context.Employees
+                                                    select p;
+
+                    return new ObservableCollection<Employee>(all);
+
+                }
             }
         }
 

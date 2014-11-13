@@ -1,40 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.Entity.Core;
-using System.Data.Odbc;
 using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.Remoting.Contexts;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using NorthWind.Model;
 using NorthWind.Reporting.DTOs;
 using NorthWind.Reporting.Errors;
-using Context = NorthWind.Model.Context;
 
 namespace NorthWind.Reporting
 {
     class Reporter : IReporter
     {
-        private IContextFactory _contextFactory;
-        private IContextHolder _contextHolder;
 
-        public Reporter(IContextFactory contextFactory)
+        private IRepository _repository;
+
+        public Reporter(IRepository repository)
         {
-            _contextFactory = contextFactory;
+            _repository = repository;
         }
 
         public Report<IList<OrdersByTotalPriceDto>, ReportError> TopOrdersByTotalPrice(int count)
         {
-
-            using (var context = _contextFactory.CreateContext())
-            {
-                context.Configuration.ProxyCreationEnabled = false;
-                IEnumerable<OrdersByTotalPriceDto> dtos = (from order in context.Orders
-                                                           join orderDetail in context.Order_Details on order.OrderID equals orderDetail.OrderID
+                IEnumerable<OrdersByTotalPriceDto> dtos = (from order in _repository.Orders
+                                                           join orderDetail in _repository.OrderDetails on order.OrderID equals orderDetail.OrderID
                                                            group orderDetail by orderDetail.OrderID into fullOrder
                                                            select new OrdersByTotalPriceDto()
                                                            {
@@ -51,14 +37,12 @@ namespace NorthWind.Reporting
                 }
 
                 return new Report<IList<OrdersByTotalPriceDto>, ReportError>() { Data = dtos.ToList(), Error = null };
-            }
         }
 
         public Report<IList<ProductsBySaleDto>, ReportError> TopProductsBySale(int count)
         {
-            using (var context = _contextFactory.CreateContext())
-            {
-                IList<ProductsBySaleDto> dtos = (from od in context.Order_Details
+            
+                IList<ProductsBySaleDto> dtos = (from od in _repository.OrderDetails
                     group od by od.ProductID
                     into orderDetailsProducts
                     select new ProductsBySaleDto()
@@ -93,32 +77,30 @@ namespace NorthWind.Reporting
                     select pd).Take(count).ToList();
 
                 return new Report<IList<ProductsBySaleDto>, ReportError>() { Data = dtosSorted, Error = null };
-            }
         }
 
         public Report<EmployeeSaleDto, ReportError> EmployeeSale(int id)
         {
-            using (var context = _contextFactory.CreateContext())
-            {
-                 EmployeeSaleDto dto = (from od in context.Order_Details
+            
+                 EmployeeSaleDto dto = (from od in _repository.OrderDetails
                     where od.Order.EmployeeID == id
                     select new EmployeeSaleDto()
                     {
                         EmployeeName = od.Order.Employee.FirstName + " " + od.Order.Employee.LastName,
                         ReportsTo = od.Order.Employee.ReportsTo ?? default(int),
-                        Orders = (from o in context.Orders
+                        Orders = (from o in _repository.Orders
                             where o.EmployeeID == id
                             select new ReportOrderDto()
                             {
                                 OrderId = o.OrderID,
                                 OrderDate = o.OrderDate ?? default(DateTime),
-                                TotalPrice = (from od2 in context.Order_Details
+                                TotalPrice = (from od2 in _repository.OrderDetails
                                     where od2.OrderID == o.OrderID
                                     select new
                                     {
                                         TotalPrice = od2.Quantity*od2.UnitPrice - od2.Discount
                                     }).Sum(x => x.TotalPrice),
-                                Products = (from od3 in context.Order_Details
+                                Products = (from od3 in _repository.OrderDetails
                                     where od3.OrderID == o.OrderID
                                     group od3 by od3.ProductID
                                     into products
@@ -140,7 +122,6 @@ namespace NorthWind.Reporting
 
                 // If employee found, return it.
                 return new Report<EmployeeSaleDto, ReportError>() {Data = dto, Error = null};
-            }
         } 
     }
 }

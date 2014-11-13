@@ -9,11 +9,10 @@
 
 namespace NorthWind.Model
 {
-    using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class northwindEntities
+    public partial class northwindEntities : DbContext
     {
         public northwindEntities()
             : base("name=northwindEntities")

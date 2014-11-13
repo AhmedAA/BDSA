@@ -9,7 +9,6 @@
 
 namespace NorthWind.Model
 {
-    using System;
     using System.Collections.Generic;
     
     public partial class Territory

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NorthWind.Reporting
+﻿namespace NorthWind.Reporting
 {
     public class Report<TData, TError>
     {
