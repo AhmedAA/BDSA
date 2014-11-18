@@ -22,9 +22,14 @@ namespace NorthWind
         public MainWindow()
         {
             InitializeComponent();
-            _repo = new MemoryRep();
-            _reporter = new Reporter(new MemoryRep());
+            setRepo(new MemoryRep());
+        }
+
+        public void setRepo(IRepository repo)
+        {
+            _repo = repo;
             _repo.NewOrderEvent += OnNewOrderEvent;
+            _reporter = new Reporter(_repo);
             this.DataContext = _repo;
         }
 

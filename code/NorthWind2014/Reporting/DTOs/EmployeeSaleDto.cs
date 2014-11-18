@@ -2,7 +2,7 @@
 
 namespace NorthWind.Reporting.DTOs
 {
-    class EmployeeSaleDto
+    public class EmployeeSaleDto
     {
         public string EmployeeName { get; set; }
         public int ReportsTo { get; set; }

@@ -2,7 +2,7 @@
 
 namespace NorthWind.Reporting.DTOs
 {
-    class ProductsBySaleDto
+    public class ProductsBySaleDto
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

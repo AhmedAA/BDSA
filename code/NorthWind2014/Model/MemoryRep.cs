@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Model
 {
-    class MemoryRep : IRepository
+    public class MemoryRep : IRepository
     {
         private ICollection<Product> _products;
         private ICollection<Order> _orders;

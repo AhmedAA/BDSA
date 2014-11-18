@@ -4,7 +4,7 @@ using NorthWind.Reporting.Errors;
 
 namespace NorthWind.Reporting
 {
-    interface IReporter
+    public interface IReporter
     {
         Report<IList<OrdersByTotalPriceDto>, ReportError> TopOrdersByTotalPrice(int count);
         Report<IList<ProductsBySaleDto>, ReportError> TopProductsBySale(int count);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NorthWind.Reporting.DTOs
 {
-    class ReportOrderDto
+    public class ReportOrderDto
     {
         public int OrderId { get; set; }
         public DateTime OrderDate { get; set; }

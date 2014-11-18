@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Reporting.DTOs
 {
-    class UnitsSoldByMonthDto
+    public class UnitsSoldByMonthDto
     {
         public int UnitsSold { get; set; }
         public int Count { get; set; }

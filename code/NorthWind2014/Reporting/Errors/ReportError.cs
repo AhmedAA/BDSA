@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Reporting.Errors
 {
-    class ReportError
+    public class ReportError
     {
         public string Message { get; set; }
 
