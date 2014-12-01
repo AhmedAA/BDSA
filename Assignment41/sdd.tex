@@ -92,6 +92,7 @@ Phillip Phoelich (ppho)\\
 1.0     & 9/9-2014 & First version of the SDD & ahaq, mikx, ppho \\
 1.1     & 16/10-2014 & Added subsystem service diagram & ahaq\\
 1.2     & 21/10-2014 & Added design pattern diagrams & ahaq, ppho\\
+1.3     & 1/12-2014 & Added persistent data mapping (schemas) & ppho\\
 \end{tabularx}
 \end{table}
 
@@ -231,6 +232,35 @@ Calendars are stored locally with all events, and synchronised to the
 server. The calendars are stored in the iCalendar format (.ics, .ical,
 etc). These calendar files are then synchronised to a file database on the
 server.
+
+
+The models above have been realised as classes in the above class diagram. This, though, can't be saved directly to persistent storage. A mapping is needed from classes to persistent storage. The schemas below show this mapping:
+
+\begin{itemize}
+\item User(\underline{id:int}, username:varchar, hashedPassword:varchar, isLoggedIn:int)
+\item EventItem(\underline{id:int}, startDate:DateTime, endDate:DateTime, title:varchar, description:text)
+\item Calendar(\underline{id:int}, title:varchar, publicCalendar:int)
+\end{itemize}
+
+These are the basic schemas, but no relations have been mapped yet. The easy ones are the one-to-many relations. A calendar can have many event items, but an event item can only be in one calendar. A calendar has exactly one owner, which is a user.
+
+
+The more tricky one is the subscribers of a calendar, because a calendar can have many subscribers (who are all users), but a user can also subscribe to several calendars. A many-to-many relation here makes an extra table necessary.
+
+
+The final schemas will look like this:
+
+\begin{itemize}
+\item User(\underline{id:int}, username:varchar, hashedPassword:varchar, isLoggedIn:int)
+\item EventItem(\underline{id:int}, startDate:DateTime, endDate:DateTime, title:varchar, description:text, calendarId: int)
+\item Calendar(\underline{id:int}, title:varchar, publicCalendar:int, ownerId: int)
+\item SubscriberCalendar(\underline{userId:int}, \underline{calendarId:int})
+\end{itemize}
+
+As a final note, notice that all tables, except the SubscriberCalendar table has an id attribute, which is a generated identifier for a single entry/object. These identifiers are the primary keys of their tables.
+
+
+In the SubscriberCalendar table, the userId and calendarId attributes are together the primary key, as a user can't be subscribed to a calendar more than once.
 
 \subsection{Access control and security}
 Our access control is simple: once an unregistered user creates an account and
